@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import './App.css'
+import Router from './components/routes/Router.jsx'
+import {BrowserRouter} from 'react-router-dom';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
+   <BrowserRouter>
     <div className="App">
-      <h2 className='text-teal-500'>HIHfiag</h2>
-      <button className="btn btn-secondary">Button</button>
-      <button className="btn btn-accent">Button</button>
+      <Router></Router>
     </div>
+   </BrowserRouter>
   )
 }
 
