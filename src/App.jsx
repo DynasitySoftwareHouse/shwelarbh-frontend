@@ -1,15 +1,18 @@
+
+=======
 import { useState } from 'react'
 import './App.css'
 import Router from './components/routes/Router.jsx'
 import {BrowserRouter} from 'react-router-dom';
-
+import ColorDescription from './components/2D/ColorDescription/ColorDescription'
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
+
+
    <BrowserRouter>
     <div className="App">
       <Router></Router>
+
     </div>
    </BrowserRouter>
   )

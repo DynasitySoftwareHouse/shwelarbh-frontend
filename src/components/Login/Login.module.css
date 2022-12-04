@@ -1,0 +1,38 @@
+.container{
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('../../assets/main_background.png');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat; 
+   }
+.formContainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.formContainer input{
+    background-color: white !important;
+    border-radius: 8px !important;
+    padding:2px 7px !important;
+    width:300px !important;
+}
+.btn{
+    background-color: red !important;
+    color:white;
+    width:300px !important;
+    border-radius: 8px !important;
+    text-transform: capitalize !important;
+   
+}
+.singup{
+    color:red;
+}
+.pass{
+    color:red;
+    text-align: center;
+    margin-top: 3px;
+}
