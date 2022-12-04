@@ -1,6 +1,4 @@
 
-=======
-import { useState } from 'react'
 import './App.css'
 import Router from './components/routes/Router.jsx'
 import {BrowserRouter} from 'react-router-dom';
