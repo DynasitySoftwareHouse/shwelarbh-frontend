@@ -15,19 +15,19 @@ function Profile() {
           <div className="card bg-white">
             <table className="text-black w-96">
               <tr>
-                <td className={style.caption}>Name-</td>
+                <td className={style.caption}>Name -</td>
                 <td className={style.details}>User Name</td>
               </tr>
               <tr>
-                <td className={style.caption}>Email-</td>
+                <td className={style.caption}>Email -</td>
                 <td className={style.details}>example@deom.com</td>
               </tr>
               <tr>
-                <td className={style.caption}>Country-</td>
+                <td className={style.caption}>Country -</td>
                 <td className={style.details}>Myanmar</td>
               </tr>
               <tr>
-                <td className={style.caption}>Balance-</td>
+                <td className={style.caption}>Balance -</td>
                 <td className={style.details}>0 Units</td>
               </tr>
             </table>
