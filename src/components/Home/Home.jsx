@@ -47,7 +47,7 @@ function Home() {
               {/* live football section */}
               <div>
                 <div className="">
-                  <a href="" >
+                  <a href="/livefootball" >
                     <img src={liveFootball} alt="" className="w-28 rounded-3xl" />
                   </a>
                 </div>
@@ -56,7 +56,7 @@ function Home() {
               {/* setting section */}
               <div>
                 <div className="">
-                  <a href="" >
+                  <a href="/setting" >
                     <img src={setting} alt="" className="w-28 rounded-3xl" />
                   </a>
                 </div>
@@ -70,7 +70,7 @@ function Home() {
               {/* live football section */}
               <div>
                 <div className="">
-                  <a href="" >
+                  <a href="/myanmar2d" >
                     <img src={myanmar2d} alt="" className="w-28 rounded-3xl" />
                   </a>
                 </div>
@@ -79,7 +79,7 @@ function Home() {
               {/* setting section */}
               <div>
                 <div className="">
-                  <a href="" >
+                  <a href="/myanmar3d" >
                     <img src={myanmar3d} alt="" className="w-28 rounded-3xl" />
                   </a>
                 </div>
@@ -93,7 +93,7 @@ function Home() {
               {/* live football section */}
               <div>
                 <div className="">
-                  <a href="" >
+                  <a href="/winnerlist" >
                     <img src={winnerList} alt="" className="w-28 rounded-3xl" />
                   </a>
                 </div>
@@ -102,7 +102,7 @@ function Home() {
               {/* setting section */}
               <div>
                 <div className="">
-                  <a href="" >
+                  <a href="/shwelarb" >
                     <img src={shwelarb} alt="" className="w-28 rounded-3xl bg-slate-900" />
                   </a>
                 </div>
@@ -112,7 +112,7 @@ function Home() {
           </div>
           {/* developed by Dynasity Software House */}
           <div>
-            <p className="text-center text-slate-400">
+            <p className=" pt-2 text-center text-slate-400">
               Developed by <a href="" className="underline text-white">
                 Dynasity Software House
               </a>
