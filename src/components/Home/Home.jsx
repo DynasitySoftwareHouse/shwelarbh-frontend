@@ -33,7 +33,7 @@ function Home() {
         {/* football betting section */}
         <div>
           <div className="flex justify-center pt-5" >
-            <a href="" className="flex justify-center rounded-md" style={{width: "90VW",backgroundColor:"#fff"}}>
+            <a href="/footballbetting" className="flex justify-center rounded-md" style={{width: "90VW",backgroundColor:"#fff"}}>
               <img src={footballBetting} style={{width: "200px"}} alt="" />
             </a>
           </div>
