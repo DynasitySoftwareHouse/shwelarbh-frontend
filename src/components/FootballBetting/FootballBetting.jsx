@@ -22,7 +22,9 @@ function FootballBetting() {
           </p>
         </div>
         <div>
-          <a href="" className="btn bg-transparent mt-5 border-none h-52 w-52 rounded-lg">
+          <a
+            href="/footballbetting/body_betting"
+            className="btn bg-transparent mt-5 border-none h-52 w-52 rounded-lg">
             <img src={footballMaungBetting} alt="" className="rounded-lg w-52 h-40" />
           </a>
           <p
@@ -32,7 +34,9 @@ function FootballBetting() {
           </p>
         </div>
         <div>
-          <a href="" className="btn bg-transparent mt-5 border-none h-52 w-52 rounded-lg">
+          <a
+            href="/footballbetting/body_betting"
+            className="btn bg-transparent mt-5 border-none h-52 w-52 rounded-lg">
             <img src={footballXMaungBetting} alt="" className="rounded-lg w-52 h-40" />
           </a>
           <p
