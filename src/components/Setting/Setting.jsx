@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import styles from "./Setting.module.css";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
-function Setting() {
-  const [showModal, setShowModal] = useState(false);
+const emails = ["username@gmail.com", "user02@gmail.com"];
 
-  const modalHandler = () => {
-    setShowModal(showModal ? false : true);
-    console.log(showModal);
+function Setting(props) {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -27,8 +34,28 @@ function Setting() {
           </div>
           {/* Language */}
           <div>
-            <a onClick={modalHandler} className="btn bg-transparent m-5 w-72">
-              Language
+            <a className="btn bg-transparent m-5 w-72">
+              <Button
+                id="basic-button"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+                style={{ color: "#fff" }}>
+                Language
+              </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}>
+                <MenuItem onClick={handleClose}>English</MenuItem>
+                <MenuItem onClick={handleClose}>Myanmar Unicode</MenuItem>
+                <MenuItem onClick={handleClose}>Myanmar Zawgyi</MenuItem>
+              </Menu>
             </a>
           </div>
           {/* Color Description */}
@@ -39,51 +66,8 @@ function Setting() {
           </div>
         </div>
       </div>
-      {showModal ? <Modal /> : <None />}
     </div>
   );
 }
 
 export default Setting;
-
-function Modal() {
-  return (
-    <div>
-      <div style={{ width: "100vw", height: "100vh" }}>
-        <div
-          style={{
-            width: "250px",
-            height: "auto",
-            backgroundColor: "#ffffff80",
-            borderRadius: "20px",
-          }}>
-          <form action="" className="p-5">
-            <ul class="py-3 bg-gray-100 rounded-xl">
-              <li>
-                <span class="block px-5 py-1 text-xs text-gray-400 font-bold">Menu Title</span>
-              </li>
-              <li>
-                <a class="block px-5 py-3 rounded-lg text-gray-900 hover:bg-gray-200 active:bg-indigo-600 active:text-white outline-none cursor-            pointer">
-                  First Menu Item
-                </a>
-              </li>
-              <li>
-                <a class="block px-5 py-3 rounded-lg text-gray-900 hover:bg-gray-200 active:bg-indigo-600 active:text-white outline-none cursor-pointer">
-                  Second Menu Item
-                </a>
-              </li>
-              <li>
-                <a class="block px-5 py-3 rounded-lg text-gray-900 hover:bg-gray-200 active:bg-indigo-600 active:text-white outline-none cursor-pointer">
-                  Third Menu Item
-                </a>
-              </li>
-            </ul>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-}
-function None() {
-  <></>;
-}

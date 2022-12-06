@@ -1,8 +1,14 @@
-
-
- .app{
-    width:100%;
-    background-color: white;
-    height:100vh;
-   
-} 
+.app {
+  width: 100%;
+  background-color: white;
+  height: 100vh;
+}
+.MuiFormControl-root {
+  border: 1px solid #ffffff;
+}
+.MuiFormLabel-root {
+  color: #fff;
+}
+.MuiInputBase-input {
+  color: #fff;
+}
