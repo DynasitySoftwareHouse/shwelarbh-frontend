@@ -1,84 +1,75 @@
-.container{
-    width:100%;
-    background-image: url('../../assets/main_background.png');
-    background-size: cover;
-    background-position: center center;
-    height:100vh;
- 
-   
+.container {
+  width: 100%;
+  background-image: url("../../assets/main_background.png");
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
 }
-.fcontainer{
-    background-color: white;
-    margin: auto;
-    border-radius: 5px;
-    text-align: center;
-    padding:40px 0;
-    
+.fcontainer {
+  background-color: white;
+  margin: auto;
+  border-radius: 5px;
+  text-align: center;
+  padding: 40px 0;
 }
-.fcontainer h1{
-    color:rgb(205, 12, 12);
-    font-weight: bold;
-    font-size: 50px;
-    
-} 
-.scontainer{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    color:black;
-    font-size: 22px;
-    margin-bottom: 3px;
-    font-weight: 400;
+.fcontainer h1 {
+  color: rgb(205, 12, 12);
+  font-weight: bold;
+  font-size: 50px;
 }
-.lottery{
-    background-color:rgb(205, 12, 12);
-    display: block;
-    width: 100%;
-    text-align: center;
-    display: block;
-    margin-top: 3px;
-    border-radius: 30px;
-    padding:5px 0;
+.scontainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: black;
+  font-size: 22px;
+  margin-bottom: 3px;
+  font-weight: 400;
 }
-.description{
-    background-color: white;
-    display: block;
-    text-align: center;
-    width:100%;
-    border-radius:5px;
-    margin-top: 3px;
-    padding:10px;
-    color: black;
+.lottery {
+  background-color: rgb(205, 12, 12);
+  display: block;
+  width: 100%;
+  text-align: center;
+  display: block;
+  margin-top: 3px;
+  border-radius: 30px;
+  padding: 5px 0;
 }
-.time{
-    background-color: white;
-    margin-top: 20px;
-    color:black;
-    text-align: center;
-    border-radius: 10px;
-    padding:50px 0;
+.description {
+  background-color: white;
+  display: block;
+  text-align: center;
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 3px;
+  padding: 10px;
+  color: black;
 }
-.last{
-   display: flex;
-   flex:1 1;
-  
-    margin-top: 50px;
-    justify-content: center;
-  
+.time {
+  background-color: white;
+  margin-top: 20px;
+  color: black;
+  text-align: center;
+  border-radius: 10px;
+  padding: 50px 0;
+}
+.last {
+  display: flex;
+  flex: 1 1;
 
+  margin-top: 50px;
+  justify-content: center;
 }
-.last div{
-    background-color: white;
-
-   border-radius: 5px;
-   padding:50px 10px;
-   text-align: center;
-   color:black;
-
-   width:50%;
-    
+.last div {
+  background-color: white;
+  border-radius: 5px;
+  padding: 50px 10px;
+  text-align: center;
+  color: black;
+  width: 50%;
 }
-.wrapper{
-    width: 96%;
-    margin: auto;
+.wrapper {
+  width: 96%;
+  margin: auto;
 }
