@@ -14,6 +14,9 @@ import TransitionHistory from "../Setting/TransitionHistory/TransitionHistory";
 import FootballBodyBetting from "../FootballBetting/FootballBodyBetting/FootballBodyBetting";
 import CurrentBetHistory from "../FootballBetting/CurrentBetHistory/CurrentBetHistory";
 import FootballResult from "../FootballBetting/FootballResult/FootballResult";
+import ColorDescription from "../2D/ColorDescription/ColorDescription";
+import LuckyNumber from "../2D/LuckyNumber/LuckyNumber";
+import TwoDList from "../2D/2DLists/TwoDLists";
 
 function Router() {
   return (
@@ -32,6 +35,9 @@ function Router() {
       <Route path="/setting/transition" element={<TransitionHistory />}></Route>
       {/* 2d */}
       <Route path="/myanmar2d" element={<Myanmar2d />}></Route>
+      <Route path="/myanmar2d/color_description" element={<ColorDescription />}></Route>
+      <Route path="/myanmar2d/lottery" element={<LuckyNumber />}></Route>
+      <Route path="/myanmar2d/two_d_list" element={<TwoDList />}></Route>
       {/* 3d */}
       <Route path="/myanmar3d" element={<Myanmar3d />}></Route>
       {/* winner list */}
