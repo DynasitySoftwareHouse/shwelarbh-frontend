@@ -1,0 +1,8 @@
+.mainContainer {
+  background-image: url("../../assets/icons/liveFootballBackground.jpeg");
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100vw;
+  height: auto;
+}

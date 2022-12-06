@@ -1,0 +1,15 @@
+.mainContainer {
+  background-image: url("../../../assets//result_background.jpeg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100vw;
+  height: auto;
+}
+.label {
+  color: #fff;
+}
+.datePickerContainer {
+  height: 150px;
+}

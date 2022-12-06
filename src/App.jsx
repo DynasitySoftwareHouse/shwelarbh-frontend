@@ -1,19 +1,17 @@
-
-import './App.css'
-import Router from './components/routes/Router.jsx'
-import {BrowserRouter} from 'react-router-dom';
-import ColorDescription from './components/2D/ColorDescription/ColorDescription'
+import "./App.css";
+import Router from "./components/routes/Router.jsx";
+import { BrowserRouter } from "react-router-dom";
+import { StyledEngineProvider } from "@mui/material/styles";
 function App() {
   return (
-
-
-   <BrowserRouter>
-    <div className="App">
-      <Router></Router>
-
-    </div>
-   </BrowserRouter>
-  )
+    <StyledEngineProvider injectFirst>
+      <BrowserRouter>
+        <div className="App">
+          <Router></Router>
+        </div>
+      </BrowserRouter>
+    </StyledEngineProvider>
+  );
 }
 
-export default App
+export default App;
