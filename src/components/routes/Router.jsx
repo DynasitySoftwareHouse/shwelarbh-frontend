@@ -21,31 +21,34 @@ import TwoDList from "../2D/2DLists/TwoDLists";
 function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Home />}></Route>
+      <Route exact index path="/" element={<Home />}></Route>
       {/* football betting */}
-      <Route path="/footballbetting" element={<FootballBetting />}></Route>
-      <Route path="/footballbetting/body_betting" element={<FootballBodyBetting />}></Route>
-      <Route path="/footballbetting/football_result" element={<FootballResult />}></Route>
-      <Route path="/footballbetting/current_bet_history" element={<CurrentBetHistory />}></Route>
+      <Route exact path="/footballbetting" element={<FootballBetting />}></Route>
+      <Route exact path="/footballbetting/body_betting" element={<FootballBodyBetting />}></Route>
+      <Route exact path="/footballbetting/football_result" element={<FootballResult />}></Route>
+      <Route
+        exact
+        path="/footballbetting/current_bet_history"
+        element={<CurrentBetHistory />}></Route>
 
-      <Route path="/livefootball" element={<LiveFootball />}></Route>
+      <Route exact path="/livefootball" element={<LiveFootball />}></Route>
       {/* setting */}
-      <Route path="/setting" element={<Setting />}></Route>
-      <Route path="setting/profile" element={<Profile />}></Route>
-      <Route path="/setting/transition" element={<TransitionHistory />}></Route>
+      <Route exact path="/setting" element={<Setting />}></Route>
+      <Route exact path="setting/profile" element={<Profile />}></Route>
+      <Route exact path="/setting/transition" element={<TransitionHistory />}></Route>
       {/* 2d */}
-      <Route path="/myanmar2d" element={<Myanmar2d />}></Route>
-      <Route path="/myanmar2d/color_description" element={<ColorDescription />}></Route>
-      <Route path="/myanmar2d/lottery" element={<LuckyNumber />}></Route>
-      <Route path="/myanmar2d/two_d_list" element={<TwoDList />}></Route>
+      <Route exact path="/myanmar2d" element={<Myanmar2d />}></Route>
+      <Route exact path="/myanmar2d/color_description" element={<ColorDescription />}></Route>
+      <Route exact path="/myanmar2d/lottery" element={<LuckyNumber />}></Route>
+      <Route exact path="/myanmar2d/two_d_list" element={<TwoDList />}></Route>
       {/* 3d */}
-      <Route path="/myanmar3d" element={<Myanmar3d />}></Route>
+      <Route exact path="/myanmar3d" element={<Myanmar3d />}></Route>
       {/* winner list */}
-      <Route path="/winnerlist" element={<WinnerList />}></Route>
-      <Route path="/shwelarb" element={<About />}></Route>
+      <Route exact path="/winnerlist" element={<WinnerList />}></Route>
+      <Route exact path="/shwelarb" element={<About />}></Route>
 
       {/* Error */}
-      <Route path="/*" element={<Error />}></Route>
+      <Route exact path="/*" element={<Error />}></Route>
     </Routes>
   );
 }
