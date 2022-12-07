@@ -10,7 +10,7 @@ import currentBetHistory from "../../assets/icons/currentBetHistory1.jpeg";
 function FootballBetting() {
   return (
     <div className={style.mainContainer}>
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex md:flex-wrap sm:flex-col justify-center items-center">
         <div>
           <a
             href="/footballbetting/body_betting"
@@ -21,6 +21,7 @@ function FootballBetting() {
             Football Body Betting
           </p>
         </div>
+
         <div>
           <a
             href="/footballbetting/body_betting"
@@ -33,6 +34,7 @@ function FootballBetting() {
             Football Maung Betting
           </p>
         </div>
+
         <div>
           <a
             href="/footballbetting/body_betting"
@@ -45,6 +47,7 @@ function FootballBetting() {
             Football X-Maung Betting
           </p>
         </div>
+
         <div>
           <a
             href="/footballbetting/football_result"
@@ -57,6 +60,7 @@ function FootballBetting() {
             Football Result
           </p>
         </div>
+
         <div className="mb-5">
           <a
             href="/footballbetting/current_bet_history"

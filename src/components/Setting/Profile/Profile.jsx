@@ -1,19 +1,24 @@
-import React from 'react'
-import userImage from '../../../assets/icons/profile1.png'
-import style from './Profile.module.css'
+import React from "react";
+import userImage from "../../../assets/icons/profile1.png";
+import style from "./Profile.module.css";
 
 function Profile() {
   return (
     <div className={style.mainContainer}>
       <div className={style.container}>
-        <div className="flex flex-col items-center">
+        <div className="sm:flex sm:flex-col md:flex-row sm:items-center">
           {/* user image */}
           <div className="flex justify-center pt-3 pb-3">
-            <img src={userImage} alt="" className="rounded-full border" style={{width: "100px"}} />
+            <img
+              src={userImage}
+              alt=""
+              className="rounded-full sm: w-28 md:w-48 md:ml-5 border"
+              // style={{ width: "100px" }}
+            />
           </div>
           {/* user info */}
-          <div className="card bg-white">
-            <table className="text-black w-96">
+          <div className="card bg-white md:ml-5">
+            <table className="text-black sm:w-96">
               <tr>
                 <td className={style.caption}>Name -</td>
                 <td className={style.details}>User Name</td>
@@ -32,20 +37,30 @@ function Profile() {
               </tr>
             </table>
           </div>
-            {/* Button group */}
+          {/* Button group */}
           <div className="">
-            <div className="flex flex-wrap justify-center mt-10">
-              <a href="" className="btn bg-white text-black m-2 border-white w-44 p-2">Bet Record</a>
-              <a href="" className="btn bg-white text-black m-2 border-white w-44 p-2">Change Password</a>
-              <a href="" className="btn bg-white text-black m-2 border-white w-44 p-2">Language</a>
-              <a href="" className="btn bg-white text-black m-2 border-white w-44 p-2">Connect Agent</a>
-              <a href="" className="btn bg-red-700 text-white m-3 w-80 p-2">Log Out</a>
+            <div className="sm:flex  md:flex-col sm:flex-wrap sm: items-center sm: justify-center mt-5 md:ml-5">
+              <a href="" className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
+                Bet Record
+              </a>
+              <a href="" className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
+                Change Password
+              </a>
+              <a href="" className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
+                Language
+              </a>
+              <a href="" className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
+                Connect Agent
+              </a>
+              <a href="" className="btn  bg-red-700 text-white sm: m-8 w-80 p-2">
+                Log Out
+              </a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Profile
+export default Profile;
