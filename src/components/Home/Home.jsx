@@ -10,13 +10,15 @@ import myanmar2d from "../../assets/icons/myanmar2D.png";
 import myanmar3d from "../../assets/icons/myanmar3D.png";
 import winnerList from "../../assets/icons/winnerList.png";
 import shwelarb from "../../assets/shwelarbh.png";
+import withdraw from "../../assets/icons/wallet.png";
+import transition from "../../assets/icons/notes.png";
 
 function Home() {
   return (
     <div className={style.mainContainer}>
       {/* Header section user name and units */}
       <header>
-        <div className="userName pt-10 flex justify-around ">
+        <div className=" pt-10 flex justify-around ">
           <div className="p-3 flex border w-40 rounded-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +61,7 @@ function Home() {
           <div className={style.rowResponsive}>
             {/* row1 */}
 
-            <div className="pt-2 flex justify-evenly md:flex-col">
+            <div className="pt-4  flex justify-evenly md:flex-col">
               {/* live football section */}
               <div>
                 <div className="md:mt-7">
@@ -82,7 +84,7 @@ function Home() {
 
             {/* row2 */}
 
-            <div className="pt-2 flex justify-evenly md:flex-col">
+            <div className="pt-4  flex justify-evenly md:flex-col">
               {/* live football section */}
               <div>
                 <div className="md:mt-7">
@@ -105,7 +107,7 @@ function Home() {
 
             {/* row3 */}
 
-            <div className="pt-2 flex justify-evenly md:flex-col">
+            <div className="pt-4  flex justify-evenly md:flex-col">
               {/* live football section */}
               <div>
                 <div className="md:mt-7">
@@ -125,11 +127,33 @@ function Home() {
                 <p className="pt-1 text-center">About Us</p>
               </div>
             </div>
+
+            {/* row 4 */}
+            <div className="pt-4  flex justify-evenly md:flex-col">
+              {/* live football section */}
+              <div>
+                <div className="md:mt-7">
+                  <a href="/transition">
+                    <img src={transition} alt="" className="w-28 rounded-3xl" />
+                  </a>
+                </div>
+                <p className="pt-1 text-center">Transition History</p>
+              </div>
+              {/* setting section */}
+              <div>
+                <div className="md:mt-7">
+                  <a href="/withdraw">
+                    <img src={withdraw} alt="" className="w-28 rounded-3xl bg-slate-900" />
+                  </a>
+                </div>
+                <p className="pt-1 text-center">Withdraw</p>
+              </div>
+            </div>
           </div>
 
           {/* developed by Dynasity Software House */}
           <div>
-            <p className=" pt-2 text-center text-slate-400">
+            <p className=" pt-4 text-center text-slate-400">
               Developed by{" "}
               <a href="" className="underline text-white">
                 Dynasity Software House
