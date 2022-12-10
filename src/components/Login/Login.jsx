@@ -1,6 +1,8 @@
+
 import React,{useState} from 'react'
 import classes from './Login.module.css'
 import logo from '../../assets/shwelarbh.png'
+
 
 const Login = () => {
 
@@ -33,6 +35,7 @@ const Login = () => {
 console.log(email);
 console.log(user);
   return (
+
 <div className={classes.container}>
  <div className={classes.formContainer}>
   <div className='mb-10'>
@@ -47,10 +50,15 @@ console.log(user);
       <button className={`${classes.btn} btn btn-md `}>Log in</button>
   </form>
   <a className={classes.pass}>Forgot Password?</a>
-  <p className='text-white text-center mt-8'>Don't have an account? <a><span className={classes.singup}>Sing Up</span></a></p>
+  <p className="text-white text-center mt-8">
+          Don't have an account?{" "}
+          <a href="/signup">
+            <span className={classes.singup}>Sing Up</span>
+          </a>
+        </p>
  </div>
  </div>
   )
 }
 
-export default Login
+export default Login;
