@@ -19,7 +19,7 @@ function Home() {
       {/* Header section user name and units */}
       <header>
         <div className=" pt-10 flex justify-around ">
-          <div className="p-3 flex border w-40 rounded-full">
+          <a href="/setting/profile" className="p-3 flex border w-40 rounded-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               style={{ width: "16px" }}
@@ -28,7 +28,7 @@ function Home() {
               <path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
             </svg>
             <p className="ml-3">User Name</p>
-          </div>
+          </a>
           <div className="p-3 flex border w-40 rounded-full">
             <img src={units} alt="" style={{ width: "20px" }} />
             <p className="ml-3">0 Units</p>
@@ -133,20 +133,20 @@ function Home() {
               {/* live football section */}
               <div>
                 <div className="md:mt-7">
-                  <a href="/transition">
+                  <a href="/recordlist">
                     <img src={transition} alt="" className="w-28 rounded-3xl" />
                   </a>
                 </div>
-                <p className="pt-1 text-center">Transition History</p>
+                <p className="pt-1 text-center">Record List</p>
               </div>
               {/* setting section */}
               <div>
                 <div className="md:mt-7">
-                  <a href="/withdraw">
+                  <a href="/transition">
                     <img src={withdraw} alt="" className="w-28 rounded-3xl bg-slate-900" />
                   </a>
                 </div>
-                <p className="pt-1 text-center">Withdraw</p>
+                <p className="pt-1 text-center">Transition</p>
               </div>
             </div>
           </div>
