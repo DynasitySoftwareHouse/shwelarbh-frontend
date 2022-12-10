@@ -27,9 +27,9 @@ function FootballResult() {
             }}
             renderInput={(startProps, endProps) => (
               <React.Fragment>
-                <TextField {...startProps} className="bg-red-200 rounded-lg  " />
+                <TextField {...startProps} className="bg-red-200 rounded-lg md:w-96 md:ml-24  " />
                 <Box sx={{ mx: 2 }}> to </Box>
-                <TextField {...endProps} className="bg-red-200 rounded-lg " />
+                <TextField {...endProps} className="bg-red-200 rounded-lg md:w-96 md:ml-24 " />
               </React.Fragment>
             )}
           />

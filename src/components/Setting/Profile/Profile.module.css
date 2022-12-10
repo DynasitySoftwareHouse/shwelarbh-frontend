@@ -16,3 +16,13 @@
 .container {
   padding-top: 24%;
 }
+@media screen and (min-width: 576px) {
+  .mainContainer {
+    display: flex;
+    justify-content: center;
+    padding-top: -100px;
+  }
+  .caption {
+    height: 70px;
+  }
+}

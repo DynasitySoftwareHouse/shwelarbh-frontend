@@ -4,7 +4,7 @@ import style from "./TransitionHistory.module.css";
 function TransitionHistory() {
   return (
     <div className={style.mainContainer}>
-      <table className="table w-96 m-auto">
+      <table className="table sm:w-96 md:w-11/12 m-auto">
         <thead className=" text-white">
           <tr className="bg-red-700">
             <td className="bg-red-700">Date</td>
