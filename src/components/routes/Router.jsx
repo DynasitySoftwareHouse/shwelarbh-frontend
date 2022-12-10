@@ -17,7 +17,7 @@ import FootballResult from "../FootballBetting/FootballResult/FootballResult";
 import ColorDescription from "../2D/ColorDescription/ColorDescription";
 import LuckyNumber from "../2D/LuckyNumber/LuckyNumber";
 import TwoDList from "../2D/2DLists/TwoDLists";
-
+import Login from '../Login/Login'
 function Router() {
   return (
     <Routes>
@@ -44,8 +44,10 @@ function Router() {
       {/* 3d */}
       <Route exact path="/myanmar3d" element={<Myanmar3d />}></Route>
       {/* winner list */}
+
+      <Route path="/login" element={<Login/>}></Route>
+
       <Route exact path="/winnerlist" element={<WinnerList />}></Route>
-      <Route exact path="/shwelarb" element={<About />}></Route>
 
       {/* Error */}
       <Route exact path="/*" element={<Error />}></Route>
