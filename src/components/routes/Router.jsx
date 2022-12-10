@@ -17,11 +17,13 @@ import FootballResult from "../FootballBetting/FootballResult/FootballResult";
 import ColorDescription from "../2D/ColorDescription/ColorDescription";
 import LuckyNumber from "../2D/LuckyNumber/LuckyNumber";
 import TwoDList from "../2D/2DLists/TwoDLists";
+import Login from "../Login/Login";
 
 function Router() {
   return (
     <Routes>
-      <Route exact index path="/" element={<Home />}></Route>
+      <Route exact index path="/" element={<Login />}></Route>
+      <Route exact path="/home" element={<Home />}></Route>
       {/* football betting */}
       <Route exact path="/footballbetting" element={<FootballBetting />}></Route>
       <Route exact path="/footballbetting/body_betting" element={<FootballBodyBetting />}></Route>
