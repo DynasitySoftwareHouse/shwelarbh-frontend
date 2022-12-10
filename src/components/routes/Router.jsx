@@ -22,7 +22,6 @@ import Login from "../Login/Login";
 import RecordList from "../RecordList/RecordList";
 import Transition from "../Transition/Transition";
 
-
 function Router() {
   return (
     <Routes>
@@ -50,8 +49,6 @@ function Router() {
       {/* 3d */}
       <Route exact path="/myanmar3d" element={<Myanmar3d />}></Route>
       {/* winner list */}
-
-      <Route path="/login" element={<Login/>}></Route>
 
       <Route exact path="/winnerlist" element={<WinnerList />}></Route>
 
