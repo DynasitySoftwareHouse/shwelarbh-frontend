@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import userImage from "../../../assets/icons/profile1.png";
 import style from "./Profile.module.css";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 
-function Profile() {
+function Profile(props) {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div className={style.mainContainer}>
       <div className={style.container}>
@@ -40,16 +52,42 @@ function Profile() {
           {/* Button group */}
           <div className="">
             <div className="sm:flex  md:flex-col sm:flex-wrap sm: items-center sm: justify-center mt-5 md:ml-5">
-              <a href="" className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
+              <a
+                href="/recordlist"
+                className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
                 Bet Record
               </a>
-              <a href="" className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
+              <a
+                href="/setting/profile/changepassword"
+                className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
                 Change Password
               </a>
-              <a href="" className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
-                Language
+              <a className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
+                <Button
+                  id="basic-button"
+                  aria-controls={open ? "basic-menu" : undefined}
+                  aria-haspopup="true"
+                  aria-expanded={open ? "true" : undefined}
+                  onClick={handleClick}
+                  style={{ color: "#000" }}>
+                  Language
+                </Button>
+                <Menu
+                  id="basic-menu"
+                  anchorEl={anchorEl}
+                  open={open}
+                  onClose={handleClose}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}>
+                  <MenuItem onClick={handleClose}>English</MenuItem>
+                  <MenuItem onClick={handleClose}>Myanmar Unicode</MenuItem>
+                  <MenuItem onClick={handleClose}>Myanmar Zawgyi</MenuItem>
+                </Menu>
               </a>
-              <a href="" className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
+              <a
+                href="/setting/profile/connectagent"
+                className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
                 Connect Agent
               </a>
               <a href="" className="btn  bg-red-700 text-white sm: m-8 w-80 p-2">

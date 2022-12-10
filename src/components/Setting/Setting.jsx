@@ -4,8 +4,6 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-const emails = ["username@gmail.com", "user02@gmail.com"];
-
 function Setting(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);

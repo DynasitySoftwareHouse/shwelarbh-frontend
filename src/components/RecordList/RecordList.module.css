@@ -4,5 +4,31 @@
   background-size: cover;
   background-attachment: fixed;
   width: 100vw;
-  height: auto;
+  height: 100vh;
+}
+.tableC {
+  width: 100%;
+}
+.tableC tr:first-child {
+  border-bottom: 1px solid #fff;
+}
+.tableC tr td {
+  padding: 20px 2px;
+  font-size: 1.1rem;
+}
+.betHistory {
+  font-size: 1.2rem;
+  padding-left: 5px;
+}
+.date {
+  font-size: 1.2rem;
+}
+.datePicker {
+  border: 1px solid #fff;
+  padding: 10px 0px;
+}
+.selector {
+  padding: 10px;
+  border: 1px solid #fff;
+  border-radius: 5px;
 }
