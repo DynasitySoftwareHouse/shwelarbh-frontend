@@ -21,11 +21,15 @@ import TwoDList from "../2D/2DLists/TwoDLists";
 import Login from "../Login/Login";
 import RecordList from "../RecordList/RecordList";
 import Transition from "../Transition/Transition";
+import SignUp from "../Login/SignUp/SignUp";
+import ChangePassword from "../Setting/Profile/Change Password/ChangePassword";
+import ConnectAgent from "../Setting/Profile/ConnectAgent/ConnectAgent";
 
 function Router() {
   return (
     <Routes>
       <Route exact index path="/" element={<Login />}></Route>
+      <Route exact path="/signup" element={<SignUp />}></Route>
       <Route exact path="/home" element={<Home />}></Route>
       {/* football betting */}
       <Route exact path="/footballbetting" element={<FootballBetting />}></Route>
@@ -40,6 +44,8 @@ function Router() {
       {/* setting */}
       <Route exact path="/setting" element={<Setting />}></Route>
       <Route exact path="setting/profile" element={<Profile />}></Route>
+      <Route exact path="setting/profile/changepassword" element={<ChangePassword />}></Route>
+      <Route exact path="/setting/profile/connectagent" element={<ConnectAgent />}></Route>
       <Route exact path="/setting/transition" element={<TransitionHistory />}></Route>
       {/* 2d */}
       <Route exact path="/myanmar2d" element={<Myanmar2d />}></Route>

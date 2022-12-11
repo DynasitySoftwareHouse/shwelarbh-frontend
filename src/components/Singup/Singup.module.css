@@ -1,0 +1,33 @@
+.container {
+  height: 100vh;
+  background-image: url("../../../assets/main_background.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.formContainer {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.formContainer input {
+  background-color: white !important;
+  border-radius: 8px !important;
+  padding: 2px 7px !important;
+  width: 350px !important;
+}
+.btn {
+  background-color: red !important;
+  color: white;
+  width: 350px !important;
+  border-radius: 8px !important;
+  text-transform: capitalize !important;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.formContainer form p {
+  width: 350px !important;
+  margin-bottom: 40px;
+}
