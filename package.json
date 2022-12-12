@@ -18,6 +18,7 @@
     "@mui/styled-engine-sc": "^5.10.16",
     "@mui/x-date-pickers": "^5.0.9",
     "@mui/x-date-pickers-pro": "^5.0.9",
+    "axios": "^1.2.1",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.6",
     "g": "^2.0.1",
@@ -27,7 +28,9 @@
     "react": "^18.2.0",
     "react-daisyui": "^2.4.6",
     "react-dom": "^18.2.0",
+    "react-router": "^6.4.5",
     "react-router-dom": "^6.4.4",
+    "react-toastify": "^9.1.1",
     "styled-components": "^5.3.6",
     "vercel": "^28.7.2"
   },
