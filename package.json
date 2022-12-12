@@ -28,7 +28,9 @@
     "react": "^18.2.0",
     "react-daisyui": "^2.4.6",
     "react-dom": "^18.2.0",
+    "react-router": "^6.4.5",
     "react-router-dom": "^6.4.4",
+    "react-toastify": "^9.1.1",
     "styled-components": "^5.3.6",
     "vercel": "^28.7.2"
   },
