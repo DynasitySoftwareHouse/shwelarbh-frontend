@@ -1,64 +1,56 @@
-
-import React,{useState} from 'react'
+import React,{useState,useRef} from 'react'
 import classes from './Login.module.css'
 import logo from '../../assets/shwelarbh.png'
-
+import {useNavigate} from 'react-router-dom'
+import axios from 'axios'
 
 const Login = () => {
-
-  const [name,setName] = useState('')
+  let navigate = useNavigate();
   const [email,setEmail] = useState('')
-  const [user,setUser] = useState({})
-  const [err,setError] = useState('')
-  const [success,setSuccess] = useState('')
-  // Name
-  const nameChangeHandler = (e) =>{
-    setName(e.target.value)
-  }
-  // Email
-  const emailChangeHandler = (e)=>{
-    setEmail(e.target.value)
-  }
-  // User
-  const userSubmitHandler = (e)=>{
+  const [password,setPassword] = useState('')
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const {VITE_APP_DOMAIN} = import.meta.env;
+ 
+
+
+  const loginHandler = (e)=>{
     e.preventDefault()
-    setUser({name,email})
-    localStorage.setItem('name',name)
-    localStorage.setItem('email',email)
-    setName("")
-    setEmail("")
-  
-
+    setEmail(emailRef.current.value);
+    setPassword(passwordRef.current.value)
+ axios.post(`${VITE_APP_DOMAIN}/api/login`,{
+  email,
+  password
+ }).then((res)=>{
+    if(res.data.status==='success')
+    localStorage.setItem('status', res.data.status);
+    localStorage.setItem('jToken', res.data.data['j_token']);
+    localStorage.setItem('lToken', res.data.data['l_token']);
+    navigate('/home')
+}).catch(err=>{
+  console.log(err);
+})
   }
 
-  console.log(name);
-console.log(email);
-console.log(user);
   return (
-
 <div className={classes.container}>
  <div className={classes.formContainer}>
   <div className='mb-10'>
     <img src={logo} className='w-40 flex justify-center items-center'></img>
   </div>
-  <form onSubmit={userSubmitHandler}>
-  <input type='text' placeholder='Enter Email or Phone' className='input mb-5 w-full focus:outline-none' onChange={nameChangeHandler}></input>
+  <form onSubmit={loginHandler}>
+  <input type='text' placeholder='Enter Email or Phone' className='input mb-5 w-full focus:outline-none' ref={emailRef}></input>
   <div>
-   <input type='password' placeholder='Password' className='input mb-5 w-full' onChange={emailChangeHandler}></input>
+   <input type='password' placeholder='Password' className='input mb-5 w-full' ref={passwordRef}></input>
    <div></div>
     </div>
       <button className={`${classes.btn} btn btn-md `}>Log in</button>
   </form>
   <a className={classes.pass}>Forgot Password?</a>
-  <p className="text-white text-center mt-8">
-          Don't have an account?{" "}
-          <a href="/signup">
-            <span className={classes.singup}>Sing Up</span>
-          </a>
-        </p>
+  <p className='text-white text-center mt-8'>Don't have an account? <a><span className={classes.singup}>Sing Up</span></a></p>
  </div>
  </div>
   )
 }
 
-export default Login;
+export default Login
