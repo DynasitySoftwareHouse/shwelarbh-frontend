@@ -5,6 +5,7 @@ import logo from "../../../assets/shwelarbh.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
@@ -18,6 +19,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [otpCode, setOtpCode] = useState("");
   const [userObj, setUserObj] = useState({});
+  const [open, setOpen] = useState(false);
 
   let navigate = useNavigate();
 
@@ -80,16 +82,16 @@ const SignUp = () => {
               confirmButtonText: "ok",
             });
             navigate("/");
-          } else {
-            MySwal.fire({
-              title: <p className="text-red-600">Error</p>,
-              text: res.data.message,
-              confirmButtonText: "ok",
-            });
           }
         })
         .catch((error) => {
-          toast.error(error.res.data.message || error.res.data.message.message);
+          const MySwal = withReactContent(Swal);
+          MySwal.fire({
+            title: <p className="text-red-600">Error</p>,
+            text: error.response.data.message,
+            confirmButtonText: "ok",
+          });
+          console.log(error);
         });
     }
   };
@@ -113,8 +115,13 @@ const SignUp = () => {
         }
       })
       .catch((error) => {
+        const MySwal = withReactContent(Swal);
+        MySwal.fire({
+          title: <p className="text-red-600">Error</p>,
+          text: error.response.data.message,
+          confirmButtonText: "ok",
+        });
         console.log(error);
-        toast.error(error.res.data.message || error.res.data.message.message);
       });
   };
 
@@ -154,18 +161,41 @@ const SignUp = () => {
               </button>
             </label>
           </form>
-          <input
-            type="password"
-            placeholder="Password"
-            className="input text-black mb-5 w-full"
-            value={password}
-            onChange={passwordHandler}></input>
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            vlaue={confirmPassword}
-            className="input text-black mb-5 w-full"
-            onChange={confirmPassHandler}></input>
+          <div className="relative">
+            <div>
+              <input
+                type={open ? "text" : "password"}
+                placeholder="Password"
+                className="input text-black mb-5 w-full"
+                value={password}
+                onChange={passwordHandler}></input>
+            </div>
+            <div className="absolute top-4 right-10 text-xl">
+              {open ? (
+                <AiFillEye onClick={() => setOpen(!open)}></AiFillEye>
+              ) : (
+                <AiFillEyeInvisible onClick={() => setOpen(!open)}></AiFillEyeInvisible>
+              )}
+            </div>
+          </div>
+
+          <div className="relative">
+            <div>
+              <input
+                type={open ? "text" : "password"}
+                placeholder="Confirm Password"
+                vlaue={confirmPassword}
+                className="input text-black mb-5 w-full"
+                onChange={confirmPassHandler}></input>
+            </div>
+            <div className="absolute top-4 right-10 text-xl">
+              {open ? (
+                <AiFillEye onClick={() => setOpen(!open)}></AiFillEye>
+              ) : (
+                <AiFillEyeInvisible onClick={() => setOpen(!open)}></AiFillEyeInvisible>
+              )}
+            </div>
+          </div>
           <button className={`${classes.btn} btn btn-md`}>Create Account</button>
         </form>
       </div>
