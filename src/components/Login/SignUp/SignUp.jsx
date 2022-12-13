@@ -3,8 +3,11 @@ import classes from "./SignUp.module.css";
 import logo from "../../../assets/shwelarbh.png";
 
 import axios from "axios";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -16,16 +19,7 @@ const SignUp = () => {
   const [otpCode, setOtpCode] = useState("");
   const [userObj, setUserObj] = useState({});
 
-  // const functon = CustomGetFunction(`api/send-email-otp`, [
-  //   {
-  //     email: email,
-  //   },
-  //   {},
-  // ]);
-  //     user_name: userName,
-  //     password: password,
-  //     password_confirmation: confirmPassword,
-  //     verification_code: otpCode,
+  let navigate = useNavigate();
 
   const emailHandler = (e) => {
     setEmail(e.target.value);
@@ -44,33 +38,57 @@ const SignUp = () => {
   };
 
   const confirmPassHandler = (e) => {
-    e.preventDefault();
     setConfirmPassword(e.target.value);
   };
 
   const { VITE_APP_DOMAIN } = import.meta.env;
   const confirmHandler = (e) => {
     e.preventDefault();
-    setUserObj({
-      user_name: userName,
-      email: email,
-      password: password,
-      password_confirmation: confirmPassword,
-    });
-    axios
-      .post(`${VITE_APP_DOMAIN}/api/register-email`, {
+    if (userName === "" || email === "" || password === "" || confirmPassword === "") {
+      console.log("error please fill the input areas");
+      const MySwal = withReactContent(Swal);
+
+      MySwal.fire({
+        title: <p className="text-red-600">Error</p>,
+        text: "Please Fill all fields",
+        confirmButtonText: "ok",
+      });
+    } else {
+      setUserObj({
+        user_name: userName,
         email: email,
-        verification_code: otpCode,
         password: password,
         password_confirmation: confirmPassword,
-        currency_code: "MMK",
-        name: userName,
-      })
-      .then((res) => {
-        if (res.data.status === "success") {
-          console.log("account created");
-        }
       });
+      axios
+        .post(`${VITE_APP_DOMAIN}/api/register-email`, {
+          email: email,
+          verification_code: otpCode,
+          password: password,
+          password_confirmation: confirmPassword,
+          currency_code: "MMK",
+          name: userName,
+        })
+        .then((res) => {
+          if (res.data.status === "success") {
+            console.log("account created");
+            const MySwal = withReactContent(Swal);
+
+            MySwal.fire({
+              title: <p className="text-lime-600">Success</p>,
+              text: "Successfully Account Created",
+              confirmButtonText: "ok",
+            });
+            navigate("/");
+          } else {
+            MySwal.fire({
+              title: <p className="text-red-600">Error</p>,
+              text: res.data.message,
+              confirmButtonText: "ok",
+            });
+          }
+        });
+    }
   };
 
   const otpHandler = (e) => {
@@ -82,6 +100,19 @@ const SignUp = () => {
       .then((res) => {
         if (res.data.status === "success") {
           console.log("code sent");
+          const MySwal = withReactContent(Swal);
+
+          MySwal.fire({
+            title: <p className="text-lime-600">Success</p>,
+            text: "Verification Code has been sent",
+            confirmButtonText: "Ok",
+          });
+        } else if (res.data.status === "error") {
+          MySwal.fire({
+            title: "Error!",
+            text: res?.data?.message,
+            confirmButtonText: "Ok",
+          });
         }
       })
       .catch((err) => {
