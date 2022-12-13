@@ -5,9 +5,6 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Logout from "./Logout";
-// import { useNavigate } from "react-router-dom";
-// import logout from "./Logout";
-
 function Profile(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -18,10 +15,6 @@ function Profile(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-//  const logout=()=>{
-//  localStorage.clear();
-//  navigate('/')
-//  }
   return (
     <div className={style.mainContainer}>
       <div className={style.container}>
