@@ -25,7 +25,6 @@ import SignUp from "../Login/SignUp/SignUp";
 import ChangePassword from "../Setting/Profile/Change Password/ChangePassword";
 import ConnectAgent from "../Setting/Profile/ConnectAgent/ConnectAgent";
 
-
 function Router() {
   return (
     <Routes>
@@ -56,9 +55,6 @@ function Router() {
       {/* 3d */}
       <Route exact path="/myanmar3d" element={<Myanmar3d />}></Route>
       {/* winner list */}
-
-      <Route path="/login" element={<Login/>}></Route>
-
       <Route exact path="/winnerlist" element={<WinnerList />}></Route>
 
       {/* Record List */}
