@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import style from "./Home.module.css";
+import axios from "axios";
 
 // image
 import units from "../../assets/icons/balance.png";
@@ -14,7 +15,21 @@ import withdraw from "../../assets/icons/wallet.png";
 import transition from "../../assets/icons/notes.png";
 
 function Home() {
+  const { VITE_APP_DOMAIN } = import.meta.env;
   useEffect(() => {
+    axios
+      .get(`${VITE_APP_DOMAIN} / api/get-login-user`, {
+        authorization,
+        accept: "application/json",
+      })
+      .then((response) => {
+        if (response.status === "success") {
+          console.log("hello");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     console.log("hello");
   }, []);
   return (
