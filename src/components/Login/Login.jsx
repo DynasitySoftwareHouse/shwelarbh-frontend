@@ -4,6 +4,9 @@ import logo from "../../assets/shwelarbh.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
 const Login = () => {
   let navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -25,6 +28,13 @@ const Login = () => {
         if (res.data.status === "success") localStorage.setItem("status", res.data.status);
         localStorage.setItem("jToken", res.data.data["j_token"]);
         localStorage.setItem("lToken", res.data.data["l_token"]);
+        const MySwal = withReactContent(Swal);
+
+        MySwal.fire({
+          title: <p className="text-lime-600">Success</p>,
+          text: "Login Successfully",
+          confirmButtonText: "ok",
+        });
         navigate("/home");
       })
       .catch((err) => {

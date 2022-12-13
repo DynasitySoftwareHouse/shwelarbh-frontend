@@ -90,7 +90,7 @@ function Profile(props) {
                 className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
                 Connect Agent
               </a>
-              <a href="" className="btn  bg-red-700 text-white sm: m-8 w-80 p-2" onClick={Logout()}>
+              <a href="" className="btn  bg-red-700 text-white sm: m-8 w-80 p-2" onClick={Logout}>
                 Log Out
               </a>
             </div>
