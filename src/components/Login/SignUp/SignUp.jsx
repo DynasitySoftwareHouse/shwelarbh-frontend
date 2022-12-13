@@ -21,6 +21,8 @@ const SignUp = () => {
   const [userObj, setUserObj] = useState({});
   const [open, setOpen] = useState(false);
 
+  const MySwal = withReactContent(Swal);
+
   let navigate = useNavigate();
 
   const emailHandler = (e) => {
@@ -74,7 +76,6 @@ const SignUp = () => {
         .then((res) => {
           if (res.data.status === "success") {
             console.log("account created");
-            const MySwal = withReactContent(Swal);
 
             MySwal.fire({
               title: <p className="text-lime-700">Success</p>,
@@ -85,7 +86,6 @@ const SignUp = () => {
           }
         })
         .catch((error) => {
-          const MySwal = withReactContent(Swal);
           MySwal.fire({
             title: <p className="text-red-600">Error</p>,
             text: error.response.data.message,
@@ -105,7 +105,6 @@ const SignUp = () => {
       .then((res) => {
         if (res.data.status === "success") {
           console.log("code sent");
-          const MySwal = withReactContent(Swal);
 
           MySwal.fire({
             title: <p className="text-lime-700">Success</p>,
@@ -115,7 +114,6 @@ const SignUp = () => {
         }
       })
       .catch((error) => {
-        const MySwal = withReactContent(Swal);
         MySwal.fire({
           title: <p className="text-red-600">Error</p>,
           text: error.response.data.message,
