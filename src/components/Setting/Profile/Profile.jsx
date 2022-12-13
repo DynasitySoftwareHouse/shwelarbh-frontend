@@ -4,11 +4,16 @@ import style from "./Profile.module.css";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Logout from "./Logout";
+import { useNavigate } from "react-router-dom";
+// import Logout from "./Logout";
 function Profile(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
+  const navigate = useNavigate()
+const logout = ()=>{
+  localStorage.clear()
+  navigate('/')
+}
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -90,7 +95,7 @@ function Profile(props) {
                 className="btn bg-white text-black m-2 md:w-80 border-white sm: w-44 p-2">
                 Connect Agent
               </a>
-              <a href="" className="btn  bg-red-700 text-white sm: m-8 w-80 p-2" onClick={Logout()}>
+              <a href="" className="btn  bg-red-700 text-white sm: m-8 w-80 p-2" onClick={logout}>
                 Log Out
               </a>
             </div>
