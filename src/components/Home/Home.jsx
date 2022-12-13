@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./Home.module.css";
 
 // image
@@ -14,6 +14,9 @@ import withdraw from "../../assets/icons/wallet.png";
 import transition from "../../assets/icons/notes.png";
 
 function Home() {
+  useEffect(() => {
+    console.log("hello");
+  }, []);
   return (
     <div className={style.mainContainer}>
       {/* Header section user name and units */}
