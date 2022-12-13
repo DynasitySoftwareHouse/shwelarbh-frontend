@@ -75,7 +75,7 @@ const Login = () => {
           <input
             type="text"
             placeholder="Email or Phone Number"
-            className="input mb-5 w-full focus:outline-none"
+            className="input mb-5 w-full focus:outline-none text-black"
             ref={emailRef}
             onChange={emailChangeHandler}></input>
 
@@ -86,7 +86,7 @@ const Login = () => {
                 placeholder="Password"
                 ref={passwordRef}
                 onChange={passwordChangeHandler}
-                className="input mb-5 w-full"></input>
+                className="input mb-5 w-full text-black"></input>
             </div>
             <div className="absolute top-3 right-4 text-xl">
               {open ? (
