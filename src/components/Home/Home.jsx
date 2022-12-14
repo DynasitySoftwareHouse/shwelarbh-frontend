@@ -16,6 +16,7 @@ import withdraw from "../../assets/icons/wallet.png";
 import transition from "../../assets/icons/notes.png";
 
 function Home() {
+
   const navigate = useNavigate();
   const { VITE_APP_DOMAIN } = import.meta.env;
 
@@ -39,6 +40,7 @@ function Home() {
         console.log(error);
       });
   }, []);
+
 
   return (
     <div className={style.mainContainer}>

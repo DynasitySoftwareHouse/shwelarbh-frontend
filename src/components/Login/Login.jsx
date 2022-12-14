@@ -13,8 +13,35 @@ const Login = () => {
   const [open, setOpen] = useState(false);
   let navigate = useNavigate();
 
+
+},[])
+  const emailChangeHandler = (e)=>{
+   setEmail(e.target.value)
+  }
+  const passwordChangeHandler = (e)=>{
+  setPassword(e.target.value)
+ }
+  const {VITE_APP_DOMAIN} = import.meta.env;
+ const loginHandler = (e)=>{
+    e.preventDefault()
+ axios.post(`${VITE_APP_DOMAIN}/api/login`,{
+  email,
+  password
+ }).then((res)=>{
+    if(res.data.status==='success')
+    console.log(res.data.data['l_token']);
+    localStorage.setItem('status', res.data.status);
+    localStorage.setItem('lToken', res.data.data['l_token']);
+    navigate('/home')
+}).catch(err=>{
+  console.log(err
+    );
+})
+  }
+
   const emailRef = useRef();
   const passwordRef = useRef();
+
 
   const { VITE_APP_DOMAIN } = import.meta.env;
 
