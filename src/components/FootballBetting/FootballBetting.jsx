@@ -10,7 +10,7 @@ import currentBetHistory from "../../assets/icons/currentBetHistory1.jpeg";
 function FootballBetting() {
   return (
     <div className={style.mainContainer}>
-      <div className="flex md:flex-wrap sm:flex-col justify-center items-center">
+      <div className="flex md:flex-wrap min-[320px]:flex-col justify-center items-center">
         <div>
           <a
             href="/footballbetting/body_betting"
