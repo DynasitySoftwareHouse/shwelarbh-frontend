@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import style from "./Home.module.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // image
 import units from "../../assets/icons/balance.png";
@@ -14,7 +16,32 @@ import withdraw from "../../assets/icons/wallet.png";
 import transition from "../../assets/icons/notes.png";
 
 function Home() {
- 
+
+  const navigate = useNavigate();
+  const { VITE_APP_DOMAIN } = import.meta.env;
+
+  useEffect(() => {
+    axios
+      .get(`${VITE_APP_DOMAIN}/api/get-login-user`, {
+        method: "GET",
+        headers: {
+          authorization: localStorage.getItem("lToken"),
+          accept: "application/json",
+        },
+      })
+      .then((response) => {
+        if (response.status === "success") {
+          console.log("success");
+          console.log(response?.data);
+          navigate("/home");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+
   return (
     <div className={style.mainContainer}>
       {/* Header section user name and units */}
