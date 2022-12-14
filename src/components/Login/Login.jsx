@@ -30,8 +30,8 @@ useEffect(()=>{
   password
  }).then((res)=>{
     if(res.data.status==='success')
+    console.log(res.data.data['l_token']);
     localStorage.setItem('status', res.data.status);
-    localStorage.setItem('jToken', res.data.data['j_token']);
     localStorage.setItem('lToken', res.data.data['l_token']);
     navigate('/home')
 }).catch(err=>{

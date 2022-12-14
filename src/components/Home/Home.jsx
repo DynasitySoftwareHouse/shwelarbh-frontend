@@ -14,6 +14,7 @@ import withdraw from "../../assets/icons/wallet.png";
 import transition from "../../assets/icons/notes.png";
 
 function Home() {
+ 
   return (
     <div className={style.mainContainer}>
       {/* Header section user name and units */}
