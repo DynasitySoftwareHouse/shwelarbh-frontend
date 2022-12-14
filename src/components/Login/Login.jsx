@@ -55,6 +55,27 @@ const Login = () => {
       });
   };
 
+  useEffect(() => {
+    axios
+      .get(`${VITE_APP_DOMAIN}/api/get-login-user`, {
+        method: "GET",
+        headers: {
+          authorization: localStorage.getItem("lToken"),
+          accept: "application/json",
+        },
+      })
+      .then((response) => {
+        if (response.status === "success") {
+          console.log("success");
+          console.log(response?.data);
+          navigate("/home");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
