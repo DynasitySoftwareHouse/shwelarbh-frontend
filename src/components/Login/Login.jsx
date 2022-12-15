@@ -65,10 +65,10 @@ const Login = () => {
         },
       })
       .then((response) => {
-        if (response.status === "success") {
+        if (response.data.status === "success") {
           console.log("success");
-          console.log(response?.data);
-          navigate("/home");
+
+          window.location.href = "/home";
         }
       })
       .catch((error) => {
