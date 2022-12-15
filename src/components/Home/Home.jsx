@@ -39,6 +39,14 @@ function Home() {
         }
       })
       .catch((error) => {
+        if (error.response.status === 401) {
+          MySwal.fire({
+            title: <p className="text-red-600">Error</p>,
+            text: "Please Login First",
+            confirmButtonText: "ok",
+          });
+          window.location.href = "/";
+        }
         console.log(error);
       });
   }, []);
