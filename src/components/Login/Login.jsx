@@ -67,7 +67,6 @@ const Login = () => {
       .then((response) => {
         if (response.data.status === "success") {
           console.log("success");
-
           window.location.href = "/home";
         }
       })
