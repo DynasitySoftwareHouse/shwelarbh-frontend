@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import style from "./Home.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 // image
 import units from "../../assets/icons/balance.png";
@@ -19,6 +21,7 @@ function Home() {
   const [dataResponse, setDataResponse] = useState({});
   const navigate = useNavigate();
   const { VITE_APP_DOMAIN } = import.meta.env;
+  const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     axios
@@ -31,8 +34,8 @@ function Home() {
       })
       .then((res) => {
         setDataResponse(res.data.data);
-        if (res.status === "success") {
-          navigate("/home");
+        if (res.data.status === "success") {
+          console.log("login success");
         }
       })
       .catch((error) => {

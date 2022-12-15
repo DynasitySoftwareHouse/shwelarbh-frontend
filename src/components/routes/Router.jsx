@@ -24,6 +24,10 @@ import Transition from "../Transition/Transition";
 import SignUp from "../Login/SignUp/SignUp";
 import ChangePassword from "../Setting/Profile/Change Password/ChangePassword";
 import ConnectAgent from "../Setting/Profile/ConnectAgent/ConnectAgent";
+import Deposit from "../Transition/Deposit/Deposit";
+import Withdraw from "../Transition/Withdraw/Withdraw";
+import DepositForm from "../Transition/Deposit/DepositForm/DepositForm";
+import WithdrawForm from "../Transition/Withdraw/WithdrawForm/WithdrawForm";
 
 function Router() {
   return (
@@ -60,7 +64,11 @@ function Router() {
       {/* Record List */}
       <Route exact path="/recordlist" element={<RecordList />} />
       {/* Transition */}
-      <Route exact path="/transition" element={<Transition />} />
+      <Route exact path="/transition" element={<Transition />}></Route>
+      <Route exact path="/transition/deposit" element={<Deposit />}></Route>
+      <Route exact path="/transition/withdraw" element={<Withdraw />}></Route>
+      <Route exact path={"/transition/deposit/depositform"} element={<DepositForm />}></Route>
+      <Route exact path={"/transition/withdraw/withdrawform"} element={<WithdrawForm />}></Route>
 
       {/* Error */}
       <Route exact path="/*" element={<Error />}></Route>

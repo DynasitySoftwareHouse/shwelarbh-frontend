@@ -82,7 +82,7 @@ const SignUp = () => {
               text: "Successfully Account Created",
               confirmButtonText: "ok",
             });
-            navigate("/");
+            window.location.href = "/";
           }
         })
         .catch((error) => {
