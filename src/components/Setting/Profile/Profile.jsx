@@ -61,22 +61,24 @@ function Profile(props) {
           {/* user info */}
           <div className="card bg-white md:ml-5">
             <table className="text-black sm:w-96">
-              <tr>
-                <td className={style.caption}>Name -</td>
-                <td className={style.details}>{dataResponse?.name}</td>
-              </tr>
-              <tr>
-                <td className={style.caption}>Email -</td>
-                <td className={style.details}>{dataResponse?.email}</td>
-              </tr>
-              <tr>
-                <td className={style.caption}>Country -</td>
-                <td className={style.details}>{dataResponse?.region?.country_name}</td>
-              </tr>
-              <tr>
-                <td className={style.caption}>Balance -</td>
-                <td className={style.details}>{dataResponse?.wallet?.main_unit} Units</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td className={style.caption}>Name -</td>
+                  <td className={style.details}>{dataResponse?.name}</td>
+                </tr>
+                <tr>
+                  <td className={style.caption}>Email -</td>
+                  <td className={style.details}>{dataResponse?.email}</td>
+                </tr>
+                <tr>
+                  <td className={style.caption}>Country -</td>
+                  <td className={style.details}>{dataResponse?.region?.country_name}</td>
+                </tr>
+                <tr>
+                  <td className={style.caption}>Balance -</td>
+                  <td className={style.details}>{dataResponse?.wallet?.main_unit} Units</td>
+                </tr>
+              </tbody>
             </table>
           </div>
           {/* Button group */}

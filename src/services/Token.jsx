@@ -1,1 +1,3 @@
-export const ltoken = localStorage.getItem("lToken");
+const lToken = localStorage.getItem("lToken");
+
+export default lToken;
