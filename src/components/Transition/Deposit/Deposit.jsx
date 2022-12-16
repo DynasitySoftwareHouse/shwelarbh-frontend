@@ -18,6 +18,12 @@ function Deposit() {
   const [announcement, setAnnouncement] = useState({});
   const lToken = localStorage.getItem("lToken");
   const [payments, setPayments] = useState([]);
+  const [accountName, setAccountName] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [transferAmount, setTransferAmount] = useState("");
+  const [sixDigits, setSixDigits] = useState("");
+  const [paymentData, setPaymentData] = useState({});
+
   useEffect(() => {
     axios
       .get(`${VITE_APP_DOMAIN}/api/admin/configuration-setting`, {
@@ -44,7 +50,6 @@ function Deposit() {
         },
       })
       .then((response) => {
-        console.log(response.data.data);
         setPayments(response.data.data);
         if (response.status === "success") {
           console.log("success");
@@ -59,31 +64,28 @@ function Deposit() {
   // <div className="" key={index}>
   // </div>
   // ))
-  console.log(lToken);
-  const myFun = () => {
-    axios
-      .get(`${VITE_APP_DOMAIN}/api/generate-payment-account/2?agent_level=agent`, {
-        method: "GET",
-        authorization: lToken,
-        accept: "application/json",
-      })
-      .then((response) => {
-        if (response.status === "success") {
-          console.log("success");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-    myFun();
-  };
+  // console.log(lToken);
+  // const myFun = (index) => {};
+
   const depositSubmitHandler = (e) => {
     e.preventDefault();
   };
 
+  const accountNameHandler = (e) => {
+    setAccountName(e.target.value);
+  };
+
+  const accountNumberHandler = (e) => {
+    setAccountNumber(e.target.value);
+  };
+
+  const transferAmountHandler = (e) => {
+    setTransferAmount(e.target.value);
+  };
+
+  const sixDigitsHandler = (e) => {
+    setSixDigits(e.target.value);
+  };
   return (
     <div className={style.mainContainer}>
       <div className={style.noticeSection}>
@@ -96,52 +98,141 @@ function Deposit() {
         <div className={`flex flex-wrap`}>
           <div className={style.bankContainer}>
             {payments ? (
-              payments?.map((payment, index) => (
+              payments?.map((payment) => (
                 // <a href="/transition/deposit/depositform" key={index}>
                 //   <img src={payment.logo} alt="" className={`w-5/12`} />
                 //   <p>{payment.name}</p>
                 // </a>
-                <div key={index}>
+                <div key={payment.id}>
                   <Button
                     id="basic-button"
                     aria-controls={open ? "basic-menu" : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
-                    onClick={handleClick}>
+                    onClick={(e, id) => {
+                      setAnchorEl(event.currentTarget);
+                      e.preventDefault();
+                      axios
+                        .request(
+                          `${VITE_APP_DOMAIN}/api/generate-admin-payment-account/${payment.id}`,
+                          {
+                            method: "GET",
+                            headers: {
+                              authorization: lToken,
+                              accept: "application/json",
+                            },
+                          }
+                        )
+                        .then((response) => {
+                          setPaymentData(response);
+                          console.log(paymentData);
+                          if (response?.data?.status === "success") {
+                            console.log("success");
+                          }
+                        })
+                        .catch((error) => {
+                          console.log(error);
+                        });
+                    }}>
                     <img src={payment.logo} alt="" className={`w-5/12`} />
                     <p>{payment.name}</p>
                   </Button>
                   <Menu
                     id="basic-menu"
-                    sx={{ width: 300 }}
                     anchorEl={anchorEl}
                     open={open}
                     onClose={handleClose}
                     MenuListProps={{
                       "aria-labelledby": "basic-button",
                     }}>
+                    {
+                      <table className={`${style.depositForm}`}>
+                        <thead>
+                          <td colSpan="4">
+                            <img
+                              src={paymentData?.data?.data?.logo}
+                              className={style.depositFormImage}
+                              alt=""
+                            />
+                          </td>
+                          <tr>
+                            <td>Account Name</td>
+                            <td>Account Number</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{paymentData?.data?.data?.name}</td>
+                            <td>{paymentData?.data?.data?.account_no}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    }
                     <form action="" className={`form-control`} onSubmit={depositSubmitHandler}>
                       <input
                         type="text"
+                        autoComplete="off"
                         placeholder="Enter Account Name"
                         className={`w-11/12 p-2 bg-teal-100 rounded-lg m-auto my-2`}
+                        value={accountName}
+                        onChange={accountNameHandler}
                       />
                       <input
                         type="text"
+                        autoComplete="off"
                         placeholder="Enter Account Number"
                         className={`w-11/12 p-2 bg-teal-100 rounded-lg m-auto my-2`}
+                        value={accountNumber}
+                        onChange={accountNumberHandler}
                       />
                       <input
                         type="text"
+                        autoComplete="off"
                         placeholder="Enter Transfer Amount"
                         className={`w-11/12 p-2 bg-teal-100 rounded-lg m-auto my-2`}
+                        value={transferAmount}
+                        onChange={transferAmountHandler}
                       />
                       <input
                         type="text"
+                        autoComplete="off"
                         placeholder="Enter Last 6 Digits"
                         className={`w-11/12 p-2 bg-teal-100 rounded-lg m-auto my-2`}
+                        value={sixDigits}
+                        onChange={sixDigitsHandler}
                       />
-                      <button className={`btn bg-teal-300 text-black w-10/12 m-auto mt-2`}>
+
+                      {/* ပြန်စစ်ရမယ် မနက်ဖြန်ဖြစ်ဖြစ် ညပဲ့ဖြစ်ဖြစ် */}
+                      <button
+                        onClick={() => {
+                          axios
+                            .post(`${VITE_APP_DOMAIN}/api/deposit`, {
+                              method: "post",
+                              headers: {
+                                authorization: lToken,
+                                accept: "application/json",
+                              },
+                              Body: {
+                                amount: transferAmount,
+                                account_number: accountNumber,
+                                account_name: accountName,
+                                transition_number: sixDigits,
+                                payment_account_id: paymentData?.data?.data?.id,
+                                currency_code: "MMK",
+                                is_crypto: 0,
+                                remark: "hello",
+                              },
+                            })
+                            .then((response) => {
+                              if (response.status === "success") {
+                                console.log("success");
+                              }
+                            })
+                            .catch((error) => {
+                              console.log(error);
+                            });
+                        }}
+                        className={`btn bg-teal-300 text-black w-10/12 m-auto mt-2`}>
                         ငွေဖြည့်မည်
                       </button>
                     </form>
