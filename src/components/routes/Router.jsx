@@ -17,6 +17,7 @@ import FootballResult from "../FootballBetting/FootballResult/FootballResult";
 import ColorDescription from "../2D/ColorDescription/ColorDescription";
 import LuckyNumber from "../2D/LuckyNumber/LuckyNumber";
 import TwoDList from "../2D/2DLists/TwoDLists";
+import ForgotPassword from "../ForgotPassword/ForgotPassword.jsx";
 
 import Login from "../Login/Login";
 import RecordList from "../RecordList/RecordList";
@@ -31,6 +32,7 @@ function Router() {
       <Route exact index path="/" element={<Login />}></Route>
       <Route exact path="/signup" element={<SignUp />}></Route>
       <Route exact path="/home" element={<Home />}></Route>
+      <Route exact path='/forgot_password' element={<ForgotPassword/>}></Route>
       {/* football betting */}
       <Route exact path="/footballbetting" element={<FootballBetting />}></Route>
       <Route exact path="/footballbetting/body_betting" element={<FootballBodyBetting />}></Route>

@@ -30,11 +30,8 @@ const Login = () => {
       .then((res) => {
         if (res.data.status === "success") {
           localStorage.setItem("status", res.data.status);
-          localStorage.setItem("jToken", res.data.data["j_token"]);
           localStorage.setItem("lToken", res.data.data["l_token"]);
-
           const MySwal = withReactContent(Swal);
-
           MySwal.fire({
             title: <p className="text-lime-600">Success</p>,
             text: "Login Successfully",
@@ -51,10 +48,8 @@ const Login = () => {
           text: err.response.data.message,
           confirmButtonText: "ok",
         });
-        console.log(err);
       });
   };
-
   useEffect(() => {
     axios
       .get(`${VITE_APP_DOMAIN}/api/get-login-user`, {
@@ -119,7 +114,7 @@ const Login = () => {
           </div>
           <button className={`${classes.btn} btn btn-md `}>Log in</button>
         </form>
-        <a className={classes.pass}>Forgot Password?</a>
+        <a className={classes.pass} href='/forgot_password'>Forgot Password?</a>
         <p className="text-white text-center mt-8">
           Don't have an account?{" "}
           <a href="/signup">
