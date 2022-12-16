@@ -12,3 +12,10 @@
 .MuiInputBase-input {
   color: #fff;
 }
+.MuiPaper-root {
+  width: 85%;
+  margin: 0px 15px;
+}
+.MuiPopover-root {
+  width: 100vw;
+}
