@@ -17,6 +17,7 @@ import shwelarb from "../../assets/shwelarbh.png";
 import withdraw from "../../assets/icons/wallet.png";
 import transition from "../../assets/icons/notes.png";
 
+import lToken from "../../services/Token";
 function Home() {
   const [dataResponse, setDataResponse] = useState({});
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ function Home() {
       .get(`${VITE_APP_DOMAIN}/api/get-login-user`, {
         method: "GET",
         headers: {
-          authorization: localStorage.getItem("lToken"),
+          authorization: lToken,
           accept: "application/json",
         },
       })
