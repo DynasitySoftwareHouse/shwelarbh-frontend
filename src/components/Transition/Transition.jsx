@@ -15,8 +15,12 @@ function Transition() {
           <p>There is no list</p>
         </div>
         <div className="flex flex-col w-full items-center">
-          <button className={`${style.button} btn bg-red-700 text-white`}>Deposit</button>
-          <button className={`${style.button} btn bg-red-700 text-white`}>Withdraw</button>
+          <a href="/transition/deposit" className={`${style.button} btn bg-red-700 text-white`}>
+            Deposit
+          </a>
+          <a href="/transition/withdraw" className={`${style.button} btn bg-red-700 text-white`}>
+            Withdraw
+          </a>
         </div>
       </div>
     </div>

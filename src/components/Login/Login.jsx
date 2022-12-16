@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 import axios from "axios";
+import lToken from "../../services/Token";
 
 const Login = () => {
   const [open, setOpen] = useState(false);
@@ -55,15 +56,14 @@ const Login = () => {
       .get(`${VITE_APP_DOMAIN}/api/get-login-user`, {
         method: "GET",
         headers: {
-          authorization: localStorage.getItem("lToken"),
+          authorization: lToken,
           accept: "application/json",
         },
       })
       .then((response) => {
-        if (response.status === "success") {
+        if (response.data.status === "success") {
           console.log("success");
-          console.log(response?.data);
-          navigate("/home");
+          window.location.href = "/home";
         }
       })
       .catch((error) => {

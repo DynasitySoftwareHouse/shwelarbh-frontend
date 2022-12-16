@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./Home.module.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 // image
 import units from "../../assets/icons/balance.png";
@@ -15,27 +17,37 @@ import shwelarb from "../../assets/shwelarbh.png";
 import withdraw from "../../assets/icons/wallet.png";
 import transition from "../../assets/icons/notes.png";
 
+import lToken from "../../services/Token";
 function Home() {
+  const [dataResponse, setDataResponse] = useState({});
   const navigate = useNavigate();
   const { VITE_APP_DOMAIN } = import.meta.env;
+  const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     axios
       .get(`${VITE_APP_DOMAIN}/api/get-login-user`, {
         method: "GET",
         headers: {
-          authorization: localStorage.getItem("lToken"),
+          authorization: lToken,
           accept: "application/json",
         },
       })
-      .then((response) => {
-        if (response.status === "success") {
-          console.log("success");
-          console.log(response?.data);
-          navigate("/home");
+      .then((res) => {
+        setDataResponse(res.data.data);
+        if (res.data.status === "success") {
+          console.log("login success");
         }
       })
       .catch((error) => {
+        if (error.response.status === 401) {
+          MySwal.fire({
+            title: <p className="text-red-600">Error</p>,
+            text: "Please Login First",
+            confirmButtonText: "ok",
+          });
+          window.location.href = "/";
+        }
         console.log(error);
       });
   }, []);
@@ -44,7 +56,7 @@ function Home() {
     <div className={style.mainContainer}>
       {/* Header section user name and units */}
       <header>
-        <div className=" pt-10 flex justify-around ">
+        <div className=" pt-8 flex justify-around ">
           <a href="/setting/profile" className="p-3 flex border w-40 rounded-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -53,11 +65,11 @@ function Home() {
               viewBox="0 0 448 512">
               <path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
             </svg>
-            <p className="ml-3">User Name</p>
+            <p className="ml-3">{dataResponse.name}</p>
           </a>
           <div className="p-3 flex border w-40 rounded-full">
             <img src={units} alt="" style={{ width: "20px" }} />
-            <p className="ml-3">0 Units</p>
+            <p className="ml-3">{dataResponse?.wallet?.main_unit} Units</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               style={{ width: "16px", marginLeft: "15px" }}

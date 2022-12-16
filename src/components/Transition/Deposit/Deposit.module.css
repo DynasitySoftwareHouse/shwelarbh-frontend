@@ -1,0 +1,31 @@
+.mainContainer {
+  background-color: rgb(222, 220, 216);
+  height: 100vh;
+  color: #000;
+}
+.noticeContainer {
+  width: 100vw;
+  height: 30vh;
+  overflow-y: auto;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #7f7f7f;
+}
+.titleNotice {
+  font-size: 1.5rem;
+  text-decoration: underline;
+  text-align: center;
+  padding: 10px 0px;
+}
+.bodyNotice {
+  width: 90%;
+  text-align: center;
+  margin: auto;
+}
+.bankSection {
+  padding-top: 10px;
+}
+.bankContainer {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+}

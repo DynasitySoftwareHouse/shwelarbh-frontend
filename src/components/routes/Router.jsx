@@ -25,47 +25,60 @@ import Transition from "../Transition/Transition";
 import SignUp from "../Login/SignUp/SignUp";
 import ChangePassword from "../Setting/Profile/Change Password/ChangePassword";
 import ConnectAgent from "../Setting/Profile/ConnectAgent/ConnectAgent";
+import Deposit from "../Transition/Deposit/Deposit";
+import Withdraw from "../Transition/Withdraw/Withdraw";
+// import DepositForm from "../Transition/Deposit/DepositForm/DepositForm";
+// import WithdrawForm from "../Transition/Withdraw/WithdrawForm/WithdrawForm";
 
 function Router() {
   return (
     <Routes>
+
       <Route exact index path="/" element={<Login />}></Route>
       <Route exact path="/signup" element={<SignUp />}></Route>
       <Route exact path="/home" element={<Home />}></Route>
       <Route exact path='/forgot_password' element={<ForgotPassword/>}></Route>
+
+     
+
       {/* football betting */}
-      <Route exact path="/footballbetting" element={<FootballBetting />}></Route>
-      <Route exact path="/footballbetting/body_betting" element={<FootballBodyBetting />}></Route>
-      <Route exact path="/footballbetting/football_result" element={<FootballResult />}></Route>
+      <Route path="/footballbetting" element={<FootballBetting />}></Route>
+      <Route path="/footballbetting/body_betting" element={<FootballBodyBetting />}></Route>
+      <Route path="/footballbetting/football_result" element={<FootballResult />}></Route>
       <Route
-        exact
+      
         path="/footballbetting/current_bet_history"
         element={<CurrentBetHistory />}></Route>
 
-      <Route exact path="/livefootball" element={<LiveFootball />}></Route>
+      <Route path="/livefootball" element={<LiveFootball />}></Route>
       {/* setting */}
-      <Route exact path="/setting" element={<Setting />}></Route>
-      <Route exact path="setting/profile" element={<Profile />}></Route>
-      <Route exact path="setting/profile/changepassword" element={<ChangePassword />}></Route>
-      <Route exact path="/setting/profile/connectagent" element={<ConnectAgent />}></Route>
-      <Route exact path="/setting/transition" element={<TransitionHistory />}></Route>
+      <Route path="/setting" element={<Setting />}></Route>
+      <Route path="setting/profile" element={<Profile />}></Route>
+      <Route path="setting/profile/changepassword" element={<ChangePassword />}></Route>
+      <Route path="/setting/profile/connectagent" element={<ConnectAgent />}></Route>
+      <Route path="/setting/transition" element={<TransitionHistory />}></Route>
       {/* 2d */}
-      <Route exact path="/myanmar2d" element={<Myanmar2d />}></Route>
-      <Route exact path="/myanmar2d/color_description" element={<ColorDescription />}></Route>
-      <Route exact path="/myanmar2d/lottery" element={<LuckyNumber />}></Route>
-      <Route exact path="/myanmar2d/two_d_list" element={<TwoDList />}></Route>
+      <Route path="/myanmar2d" element={<Myanmar2d />}></Route>
+      <Route path="/myanmar2d/color_description" element={<ColorDescription />}></Route>
+      <Route path="/myanmar2d/lottery" element={<LuckyNumber />}></Route>
+      <Route path="/myanmar2d/two_d_list" element={<TwoDList />}></Route>
       {/* 3d */}
-      <Route exact path="/myanmar3d" element={<Myanmar3d />}></Route>
+      <Route path="/myanmar3d" element={<Myanmar3d />}></Route>
       {/* winner list */}
-      <Route exact path="/winnerlist" element={<WinnerList />}></Route>
+      <Route path="/winnerlist" element={<WinnerList />}></Route>
 
       {/* Record List */}
-      <Route exact path="/recordlist" element={<RecordList />} />
+      <Route path="/recordlist" element={<RecordList />} />
       {/* Transition */}
-      <Route exact path="/transition" element={<Transition />} />
+      <Route path="/transition" element={<Transition />}></Route>
+      <Route path="/transition/deposit" element={<Deposit />}></Route>
+      <Route path="/transition/withdraw" element={<Withdraw />}></Route>
+
+      {/* <Route path={"/transition/deposit/depositform"} element={<DepositForm />}></Route>
+      <Route path={"/transition/withdraw/withdrawform"} element={<WithdrawForm />}></Route> */}
 
       {/* Error */}
-      <Route exact path="/*" element={<Error />}></Route>
+      <Route path="/*" element={<Error />}></Route>
     </Routes>
   );
 }

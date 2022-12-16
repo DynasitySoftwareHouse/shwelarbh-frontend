@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import userImage from "../../../assets/icons/profile1.png";
+import axios from "axios";
 import style from "./Profile.module.css";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
@@ -7,19 +8,43 @@ import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 // import Logout from "./Logout";
 function Profile(props) {
+  const { VITE_APP_DOMAIN } = import.meta.env;
+  const [dataResponse, setDataResponse] = useState({});
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const navigate = useNavigate()
-const logout = ()=>{
-  localStorage.clear()
-  navigate('/')
-}
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+  useEffect(() => {
+    axios
+      .get(`${VITE_APP_DOMAIN}/api/get-login-user`, {
+        method: "GET",
+        headers: {
+          authorization: localStorage.getItem("lToken"),
+          accept: "application/json",
+        },
+      })
+      .then((res) => {
+        setDataResponse(res.data.data);
+        if (res.status === "success") {
+          navigate("/home");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // console.log(dataResponse);
   return (
     <div className={style.mainContainer}>
       <div className={style.container}>
@@ -36,22 +61,24 @@ const logout = ()=>{
           {/* user info */}
           <div className="card bg-white md:ml-5">
             <table className="text-black sm:w-96">
-              <tr>
-                <td className={style.caption}>Name -</td>
-                <td className={style.details}>User Name</td>
-              </tr>
-              <tr>
-                <td className={style.caption}>Email -</td>
-                <td className={style.details}>example@deom.com</td>
-              </tr>
-              <tr>
-                <td className={style.caption}>Country -</td>
-                <td className={style.details}>Myanmar</td>
-              </tr>
-              <tr>
-                <td className={style.caption}>Balance -</td>
-                <td className={style.details}>0 Units</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td className={style.caption}>Name -</td>
+                  <td className={style.details}>{dataResponse?.name}</td>
+                </tr>
+                <tr>
+                  <td className={style.caption}>Email -</td>
+                  <td className={style.details}>{dataResponse?.email}</td>
+                </tr>
+                <tr>
+                  <td className={style.caption}>Country -</td>
+                  <td className={style.details}>{dataResponse?.region?.country_name}</td>
+                </tr>
+                <tr>
+                  <td className={style.caption}>Balance -</td>
+                  <td className={style.details}>{dataResponse?.wallet?.main_unit} Units</td>
+                </tr>
+              </tbody>
             </table>
           </div>
           {/* Button group */}
@@ -96,10 +123,7 @@ const logout = ()=>{
                 Connect Agent
               </a>
 
-              
-
               <a href="" className="btn  bg-red-700 text-white sm: m-8 w-80 p-2" onClick={logout}>
-
                 Log Out
               </a>
             </div>
