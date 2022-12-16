@@ -29,3 +29,15 @@
   display: flex;
   flex-wrap: wrap;
 }
+.depositForm {
+  width: 100%;
+  text-align: center;
+}
+.depositForm tr td {
+  padding: 5px;
+  user-select: all;
+}
+.depositFormImage {
+  width: 50%;
+  margin: auto;
+}

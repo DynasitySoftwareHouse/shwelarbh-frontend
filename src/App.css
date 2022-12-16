@@ -13,8 +13,10 @@
   color: #fff;
 }
 .MuiPaper-root {
+  position: absolute !important;
+  top: 50;
   width: 85%;
-  margin: 0px 15px;
+  margin: -250px 15px 0px;
 }
 .MuiPopover-root {
   width: 100vw;
