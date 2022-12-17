@@ -86,6 +86,12 @@ function Deposit() {
   const sixDigitsHandler = (e) => {
     setSixDigits(e.target.value);
   };
+
+  const author = {
+    Authorization: lToken,
+    Accept: "application/json",
+  };
+  console.log(Number(accountNumber));
   return (
     <div className={style.mainContainer}>
       <div className={style.noticeSection}>
@@ -117,10 +123,7 @@ function Deposit() {
                           `${VITE_APP_DOMAIN}/api/generate-admin-payment-account/${payment.id}`,
                           {
                             method: "GET",
-                            headers: {
-                              authorization: lToken,
-                              accept: "application/json",
-                            },
+                            headers: author,
                           }
                         )
                         .then((response) => {
@@ -178,7 +181,7 @@ function Deposit() {
                         onChange={accountNameHandler}
                       />
                       <input
-                        type="text"
+                        type="number"
                         autoComplete="off"
                         placeholder="Enter Account Number"
                         className={`w-11/12 p-2 bg-teal-100 rounded-lg m-auto my-2`}
@@ -186,7 +189,7 @@ function Deposit() {
                         onChange={accountNumberHandler}
                       />
                       <input
-                        type="text"
+                        type="number"
                         autoComplete="off"
                         placeholder="Enter Transfer Amount"
                         className={`w-11/12 p-2 bg-teal-100 rounded-lg m-auto my-2`}
@@ -202,27 +205,26 @@ function Deposit() {
                         onChange={sixDigitsHandler}
                       />
 
-                      {/* ပြန်စစ်ရမယ် မနက်ဖြန်ဖြစ်ဖြစ် ညပဲ့ဖြစ်ဖြစ် */}
                       <button
                         onClick={() => {
                           axios
-                            .post(`${VITE_APP_DOMAIN}/api/deposit`, {
-                              method: "post",
-                              headers: {
-                                authorization: lToken,
-                                accept: "application/json",
-                              },
-                              Body: {
-                                amount: transferAmount,
-                                account_number: accountNumber,
+                            .post(
+                              `${VITE_APP_DOMAIN}/api/deposit`,
+                              {
+                                amount: Number(transferAmount),
+                                account_no: accountNumber,
                                 account_name: accountName,
-                                transition_number: sixDigits,
+                                transaction_no: sixDigits,
                                 payment_account_id: paymentData?.data?.data?.id,
                                 currency_code: "MMK",
                                 is_crypto: 0,
                                 remark: "hello",
                               },
-                            })
+                              {
+                                method: "POST",
+                                headers: author,
+                              }
+                            )
                             .then((response) => {
                               if (response.status === "success") {
                                 console.log("success");
