@@ -47,6 +47,7 @@ const Login = () => {
         MySwal.fire({
           title: <p className="text-red-600">Error</p>,
           text: err.response.data.message,
+          icon: "error",
           confirmButtonText: "ok",
         });
       });
@@ -114,7 +115,9 @@ const Login = () => {
           </div>
           <button className={`${classes.btn} btn btn-md `}>Log in</button>
         </form>
-        <a className={classes.pass} href='/forgot_password'>Forgot Password?</a>
+        <a className={classes.pass} href="/forgot_password">
+          Forgot Password?
+        </a>
         <p className="text-white text-center mt-8">
           Don't have an account?{" "}
           <a href="/signup">

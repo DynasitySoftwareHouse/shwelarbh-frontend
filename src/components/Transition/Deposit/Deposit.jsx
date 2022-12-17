@@ -5,6 +5,9 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
 function Deposit() {
   // mui
   const [anchorEl, setAnchorEl] = useState(null);
@@ -91,7 +94,8 @@ function Deposit() {
     Authorization: lToken,
     Accept: "application/json",
   };
-  console.log(Number(accountNumber));
+
+  const MySwal = withReactContent(Swal);
   return (
     <div className={style.mainContainer}>
       <div className={style.noticeSection}>
@@ -227,6 +231,12 @@ function Deposit() {
                             )
                             .then((response) => {
                               if (response.status === "success") {
+                                MySwal.fire({
+                                  title: <p className="text-lime-600">Success</p>,
+                                  text: "Deposit Success",
+                                  icon: "success",
+                                  confirmButtonText: "ok",
+                                });
                                 console.log("success");
                               }
                             })
