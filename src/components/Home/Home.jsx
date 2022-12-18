@@ -29,7 +29,7 @@ function Home() {
       .get(`${VITE_APP_DOMAIN}/api/get-login-user`, {
         method: "GET",
         headers: {
-          authorization: lToken,
+          authorization: localStorage.getItem("lToken"),
           accept: "application/json",
         },
       })
@@ -44,6 +44,7 @@ function Home() {
           MySwal.fire({
             title: <p className="text-red-600">Error</p>,
             text: "Please Login First",
+            icon: "error",
             confirmButtonText: "ok",
           });
           window.location.href = "/";
