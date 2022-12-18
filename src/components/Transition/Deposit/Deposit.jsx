@@ -233,7 +233,7 @@ function Deposit() {
                               if (response.status === "success") {
                                 MySwal.fire({
                                   title: <p className="text-lime-600">Success</p>,
-                                  text: "Deposit Success",
+                                  text: "Deposit Success Please Wait Confirmation",
                                   icon: "success",
                                   confirmButtonText: "ok",
                                 });
@@ -241,7 +241,14 @@ function Deposit() {
                               }
                             })
                             .catch((error) => {
-                              console.log(error);
+                              MySwal.fire({
+                                title: <p className="text-red-600">Error</p>,
+                                text: error?.response?.data?.message,
+                                icon: "error",
+                                confirmButtonText: "ok",
+                              });
+                              handleClose();
+                              console.log(error?.response?.data?.message);
                             });
                         }}
                         className={`btn bg-teal-300 text-black w-10/12 m-auto mt-2`}>

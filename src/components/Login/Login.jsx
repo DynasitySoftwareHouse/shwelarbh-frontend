@@ -18,6 +18,7 @@ const Login = () => {
   const passwordRef = useRef();
 
   const { VITE_APP_DOMAIN } = import.meta.env;
+  const MySwal = withReactContent(Swal);
 
   const loginHandler = (e) => {
     e.preventDefault();
@@ -32,7 +33,7 @@ const Login = () => {
         if (res.data.status === "success") {
           localStorage.setItem("status", res.data.status);
           localStorage.setItem("lToken", res.data.data["l_token"]);
-          const MySwal = withReactContent(Swal);
+
           MySwal.fire({
             title: <p className="text-lime-600">Success</p>,
             text: "Login Successfully",
@@ -43,7 +44,6 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        const MySwal = withReactContent(Swal);
         MySwal.fire({
           title: <p className="text-red-600">Error</p>,
           text: err.response.data.message,
