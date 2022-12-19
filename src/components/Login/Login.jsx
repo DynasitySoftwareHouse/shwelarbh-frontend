@@ -1,6 +1,5 @@
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
 import React, { useState, useRef, useEffect } from "react";
 import classes from "./Login.module.css";
 import logo from "../../assets/shwelarbh.png";
@@ -13,7 +12,6 @@ import lToken from "../../services/Token";
 const Login = () => {
   const [open, setOpen] = useState(false);
   let navigate = useNavigate();
-
   const emailRef = useRef();
   const passwordRef = useRef();
 

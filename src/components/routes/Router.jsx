@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, BrowserRouter, Route } from "react-router-dom";
+import Loading from "../Loading/Loading.jsx";
 import Home from "../Home/Home.jsx";
 import Setting from "../Setting/Setting";
 import Error from "../Error/Error";
@@ -79,6 +80,8 @@ function Router() {
 
       {/* Error */}
       <Route path="/*" element={<Error />}></Route>
+      {/* Loading */}
+      <Route path='/loading' element={<Loading/>}></Route>
     </Routes>
   );
 }
