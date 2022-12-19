@@ -4,19 +4,14 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
 function Deposit() {
-  // mui
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const { VITE_APP_DOMAIN } = import.meta.env;
   const [announcement, setAnnouncement] = useState({});
   const lToken = localStorage.getItem("lToken");
@@ -26,7 +21,6 @@ function Deposit() {
   const [transferAmount, setTransferAmount] = useState("");
   const [sixDigits, setSixDigits] = useState("");
   const [paymentData, setPaymentData] = useState({});
-
   useEffect(() => {
     axios
       .get(`${VITE_APP_DOMAIN}/api/admin/configuration-setting`, {
@@ -63,13 +57,6 @@ function Deposit() {
         console.log(error);
       });
   }, []);
-
-  // const paymentMap = payment?.map((payment, index) => (
-  // <div className="" key={index}>
-  // </div>
-  // ))
-  // console.log(lToken);
-  // const myFun = (index) => {};
 
   const depositSubmitHandler = (e) => {
     e.preventDefault();
@@ -122,11 +109,13 @@ function Deposit() {
                       display: "flex",
                       flexDirection: "column",
                     }}
+                    id="basic-button"
                     aria-controls={open ? "basic-menu" : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
                     onClick={(e, id) => {
                       setAnchorEl(event.currentTarget);
+
                       e.preventDefault();
                       axios
                         .request(
