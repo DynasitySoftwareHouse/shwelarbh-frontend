@@ -12,14 +12,14 @@ import lToken from "../../services/Token";
 function Transition() {
   const { VITE_APP_DOMAIN } = import.meta.env;
 
-  // const [userTransaction, setUserTransaction] = useState({});
-  const [withdrawHistory,setWithdrawHistory] = useState([]);
+  const [userTransaction, setUserTransaction] = useState({});
+  const [withdrawHistory, setWithdrawHistory] = useState([]);
   console.log(withdrawHistory);
 
   const userData = useContext(UserContext);
 
-//this is kaung commit deposit history api fetch
- useEffect(() => {
+  //this is kaung commit deposit history api fetch
+  useEffect(() => {
     axios
       .get(`${VITE_APP_DOMAIN}/api/deposit-histories?sortColumn=id&sortDirection=desc&limit=20`, {
         methods: "GET",
@@ -40,8 +40,8 @@ function Transition() {
         console.log(error);
       });
   }, []);
-  
-//this is thazin commit withdraw history api fetch
+
+  //this is thazin commit withdraw history api fetch
   useEffect(() => {
     axios
       .get(`${VITE_APP_DOMAIN}/api/user-withdraw?receive user_id=${userData?.user_id}`, {
@@ -52,8 +52,8 @@ function Transition() {
         },
       })
       .then((response) => {
-       setWithdrawHistory(response.data.data)
-       
+        setWithdrawHistory(response.data.data);
+
         if (response.data.status === "success") {
           console.log(response.data.message);
           // console.log(response);
@@ -89,7 +89,7 @@ function Transition() {
               </tr>
             </thead>
             <tbody>
-//This is kaung commit deposit history
+              //This is kaung commit deposit history
               {userTransaction ? (
                 userTransaction?.data?.map((item) => (
                   <tr key={item.id}>
@@ -109,25 +109,37 @@ function Transition() {
               ) : (
                 <p>There is no list</p>
               )}
-              
-//This is thazin commit withdraw history
-              {
-                withdrawHistory.map(withdraw=>{
-                  return (
-                    <>
-                     <tr>
-                <td><p style={{color:'white'}}>{withdraw.account_no}</p></td>
-                <td><p style={{color:'white'}}>-{withdraw.amount}</p></td>
-                <td><p style={{color:'white'}}>{withdraw.payment_provider_name
-}</p></td>
-                <td><p style={{color:'white'}}>{withdraw.created_at.toLocalDateString()}</p></td>
-                <td><p style={{color:'white'}}>{withdraw.status}</p></td>
-               
-              </tr>
-                    </>
-                  )
-                })
-              }
+              //This is thazin commit withdraw history
+              {withdrawHistory.map((withdraw) => {
+                return (
+                  <>
+                    <tr>
+                      <td>
+                        <p style={{ color: "white" }}>{withdraw.account_no}</p>
+                      </td>
+                      <td>
+                        <p style={{ color: "white" }}>-{withdraw.amount}</p>
+                      </td>
+                      <td>
+                        <p style={{ color: "white" }}>{withdraw.payment_provider_name}</p>
+                      </td>
+                      <td>
+                        <p style={{ color: "white" }}>
+                          {new Date(withdraw.created_at).toLocaleDateString()}
+                        </p>
+                      </td>
+                      <td>
+                        <p
+                          className={`${
+                            withdraw.status === "complete" ? "text-lime-600" : "text-red-600"
+                          }`}>
+                          {withdraw.status}
+                        </p>
+                      </td>
+                    </tr>
+                  </>
+                );
+              })}
               {/* <tr>
                 <td><p style={{color:'red'}}>1</p></td>
                 <td><p style={{color:'red'}}>2</p></td>
@@ -152,9 +164,7 @@ function Transition() {
                 <td><p style={{color:'red'}}>5</p></td>
                
               </tr> */}
-             
               {/* {userTransaction ? <h1 className={`text-black`}>Hello</h1> : <p>There is no list</p>} */}
-
             </tbody>
           </table>
         </div>
