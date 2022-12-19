@@ -19,7 +19,7 @@ function Transition() {
   // console.log(userData);
   useEffect(() => {
     axios
-      .get(`${VITE_APP_DOMAIN}/api/wallet/transaction-histories?user_id=${userData?.user_id}`, {
+      .get(`${VITE_APP_DOMAIN}/api/deposit-histories?sortColumn=id&sortDirection=desc&limit=20`, {
         methods: "GET",
         headers: {
           authorization: lToken,
@@ -37,7 +37,7 @@ function Transition() {
       .catch((error) => {
         console.log(error);
       });
-  }, [`${VITE_APP_DOMAIN}/api/wallet/transaction-histories?user_id=${userData?.user_id}`]);
+  }, []);
 
   return (
     <div className={style.mainContainer}>
@@ -48,7 +48,11 @@ function Transition() {
             <span className={`text-2xl font-bold px-5`}>{userData?.wallet?.main_unit}</span> Units
           </p>
         </div>
-        <div className={`${style.list} flex justify-center `}>
+        <div className="flex justify-center items-center">
+          <button className={`btn active bg-green-600 text-white m-3`}>Deposit histories</button>
+          <button className={`btn bg-green-600 text-white m-3`}>Withdraw histories</button>
+        </div>
+        <div className={`${style.list} `}>
           <table className={`w-full bg-slate-100 table text-white`}>
             <thead>
               <tr>
@@ -60,11 +64,29 @@ function Transition() {
               </tr>
             </thead>
             <tbody>
-              {userTransaction ? <h1 className={`text-black`}>Hello</h1> : <p>There is no list</p>}
+              {userTransaction ? (
+                userTransaction?.data?.map((item) => (
+                  <tr key={item.id}>
+                    <td style={{ maxHeight: "50px" }}>{item.account_no}</td>
+                    <td style={{ maxHeight: "50px" }}>{item.amount}</td>
+                    <td style={{ maxHeight: "50px" }}>{item.payment_provider_name}</td>
+                    <td style={{ maxHeight: "50px" }}>
+                      {new Date(item?.created_at).toLocaleDateString()}
+                    </td>
+                    <td
+                      style={{ maxHeight: "50px" }}
+                      className={`${item.status === "approve" ? "text-lime-600" : "text-red-600"}`}>
+                      {item.status}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <p>There is no list</p>
+              )}
             </tbody>
           </table>
         </div>
-        <div className="flex flex-col w-full items-center">
+        <div className="flex justify-center w-full items-center">
           <a href="/transition/deposit" className={`${style.button} btn bg-red-700 text-white`}>
             Deposit
           </a>
