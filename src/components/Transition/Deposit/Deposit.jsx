@@ -53,6 +53,7 @@ function Deposit() {
         },
       })
       .then((response) => {
+        console.log(response.data);
         setPayments(response.data.data);
         if (response.status === "success") {
           console.log("success");
@@ -113,9 +114,14 @@ function Deposit() {
                 //   <img src={payment.logo} alt="" className={`w-5/12`} />
                 //   <p>{payment.name}</p>
                 // </a>
-                <div key={payment.id}>
+                <button key={payment.id}>
                   <Button
-                    id="basic-button"
+                    style={{
+                      width: "150px",
+                      height: "150px",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
                     aria-controls={open ? "basic-menu" : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
@@ -141,9 +147,15 @@ function Deposit() {
                           console.log(error);
                         });
                     }}>
-                    <img src={payment.logo} alt="" className={`w-5/12`} />
-                    <p>{payment.name}</p>
+                    <img
+                      src={payment.logo}
+                      alt=""
+                      className={`w-5/12`}
+                      style={{ borderRadius: "10px" }}
+                    />
+                    <p style={{ textAlign: "center", marginTop: "10px" }}>{payment.name}</p>
                   </Button>
+
                   <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}
@@ -256,7 +268,7 @@ function Deposit() {
                       </button>
                     </form>
                   </Menu>
-                </div>
+                </button>
               ))
             ) : (
               <div>
