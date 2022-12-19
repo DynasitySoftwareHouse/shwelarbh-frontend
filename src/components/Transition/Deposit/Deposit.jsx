@@ -4,19 +4,14 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
 function Deposit() {
-  // mui
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const { VITE_APP_DOMAIN } = import.meta.env;
   const [announcement, setAnnouncement] = useState({});
   const lToken = localStorage.getItem("lToken");
@@ -26,7 +21,6 @@ function Deposit() {
   const [transferAmount, setTransferAmount] = useState("");
   const [sixDigits, setSixDigits] = useState("");
   const [paymentData, setPaymentData] = useState({});
-
   useEffect(() => {
     axios
       .get(`${VITE_APP_DOMAIN}/api/admin/configuration-setting`, {
@@ -53,6 +47,7 @@ function Deposit() {
         },
       })
       .then((response) => {
+   
         setPayments(response.data.data);
         if (response.status === "success") {
           console.log("success");
@@ -63,12 +58,6 @@ function Deposit() {
       });
   }, []);
 
-  // const paymentMap = payment?.map((payment, index) => (
-  // <div className="" key={index}>
-  // </div>
-  // ))
-  // console.log(lToken);
-  // const myFun = (index) => {};
 
   const depositSubmitHandler = (e) => {
     e.preventDefault();
@@ -109,18 +98,16 @@ function Deposit() {
           <div className={style.bankContainer}>
             {payments ? (
               payments?.map((payment) => (
-                // <a href="/transition/deposit/depositform" key={index}>
-                //   <img src={payment.logo} alt="" className={`w-5/12`} />
-                //   <p>{payment.name}</p>
-                // </a>
                 <div key={payment.id}>
-                  <Button
+
+                 <Button
                     id="basic-button"
                     aria-controls={open ? "basic-menu" : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
                     onClick={(e, id) => {
                       setAnchorEl(event.currentTarget);
+                   
                       e.preventDefault();
                       axios
                         .request(
@@ -255,7 +242,7 @@ function Deposit() {
                         ငွေဖြည့်မည်
                       </button>
                     </form>
-                  </Menu>
+                  </Menu> 
                 </div>
               ))
             ) : (
