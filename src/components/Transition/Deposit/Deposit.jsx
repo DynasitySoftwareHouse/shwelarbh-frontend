@@ -47,7 +47,7 @@ function Deposit() {
         },
       })
       .then((response) => {
-   
+        console.log(response.data);
         setPayments(response.data.data);
         if (response.status === "success") {
           console.log("success");
@@ -57,7 +57,6 @@ function Deposit() {
         console.log(error);
       });
   }, []);
-
 
   const depositSubmitHandler = (e) => {
     e.preventDefault();
@@ -98,16 +97,25 @@ function Deposit() {
           <div className={style.bankContainer}>
             {payments ? (
               payments?.map((payment) => (
-                <div key={payment.id}>
-
-                 <Button
+                // <a href="/transition/deposit/depositform" key={index}>
+                //   <img src={payment.logo} alt="" className={`w-5/12`} />
+                //   <p>{payment.name}</p>
+                // </a>
+                <button key={payment.id}>
+                  <Button
+                    style={{
+                      width: "150px",
+                      height: "150px",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
                     id="basic-button"
                     aria-controls={open ? "basic-menu" : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? "true" : undefined}
                     onClick={(e, id) => {
                       setAnchorEl(event.currentTarget);
-                   
+
                       e.preventDefault();
                       axios
                         .request(
@@ -128,9 +136,15 @@ function Deposit() {
                           console.log(error);
                         });
                     }}>
-                    <img src={payment.logo} alt="" className={`w-5/12`} />
-                    <p>{payment.name}</p>
+                    <img
+                      src={payment.logo}
+                      alt=""
+                      className={`w-5/12`}
+                      style={{ borderRadius: "10px" }}
+                    />
+                    <p style={{ textAlign: "center", marginTop: "10px" }}>{payment.name}</p>
                   </Button>
+
                   <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}
@@ -242,8 +256,8 @@ function Deposit() {
                         ငွေဖြည့်မည်
                       </button>
                     </form>
-                  </Menu> 
-                </div>
+                  </Menu>
+                </button>
               ))
             ) : (
               <div>
