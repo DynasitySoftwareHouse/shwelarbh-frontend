@@ -61,6 +61,7 @@ function Withdraw() {
       }
     })
     .then(res=>{
+       
       setPayments(res.data.data)
       
     })
@@ -177,11 +178,12 @@ function Withdraw() {
                               }
                             )
                             .then((response) => {
-                              console.log(response)
-                              if (response.status === "success") {
+                              console.log(response);
+                              console.log(response.data.status)
+                              if (response.data.status === "success") {
                                 MySwal.fire({
                                   title: <p className="text-lime-600">Success</p>,
-                                  text: "Deposit Success Please Wait Confirmation",
+                                  text: "withdraw submit successful",
                                   icon: "success",
                                   confirmButtonText: "ok",
                                 }); 

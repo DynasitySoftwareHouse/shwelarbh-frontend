@@ -12,23 +12,25 @@ import lToken from "../../services/Token";
 function Transition() {
   const { VITE_APP_DOMAIN } = import.meta.env;
 
-  const [userTransaction, setUserTransaction] = useState({});
+  // const [userTransaction, setUserTransaction] = useState({});
+  const [withdrawHistory,setWithdrawHistory] = useState([]);
+  console.log(withdrawHistory);
 
   const userData = useContext(UserContext);
 
-  // console.log(userData);
+
   useEffect(() => {
     axios
-      .get(`${VITE_APP_DOMAIN}/api/wallet/transaction-histories?user_id=${userData?.user_id}`, {
-        methods: "GET",
+      .get(`${VITE_APP_DOMAIN}/api/user-withdraw?receive user_id=${userData?.user_id}`, {
+        method: "GET",
         headers: {
           authorization: lToken,
           accept: "application/json",
         },
       })
       .then((response) => {
-        setUserTransaction(response.data);
-        console.log(response);
+       setWithdrawHistory(response.data.data)
+       
         if (response.data.status === "success") {
           console.log(response.data.message);
           // console.log(response);
@@ -37,7 +39,7 @@ function Transition() {
       .catch((error) => {
         console.log(error);
       });
-  }, [`${VITE_APP_DOMAIN}/api/wallet/transaction-histories?user_id=${userData?.user_id}`]);
+  }, [`${VITE_APP_DOMAIN}/api/user-withdraw?receive user_id=${userData?.user_id}`]);
 
   return (
     <div className={style.mainContainer}>
@@ -60,7 +62,49 @@ function Transition() {
               </tr>
             </thead>
             <tbody>
-              {userTransaction ? <h1 className={`text-black`}>Hello</h1> : <p>There is no list</p>}
+              {
+                withdrawHistory.map(withdraw=>{
+                  return (
+                    <>
+                     <tr>
+                <td><p style={{color:'white'}}>{withdraw.account_no}</p></td>
+                <td><p style={{color:'white'}}>-{withdraw.amount}</p></td>
+                <td><p style={{color:'white'}}>{withdraw.payment_provider_name
+}</p></td>
+                <td><p style={{color:'white'}}>{withdraw.created_at}</p></td>
+                <td><p style={{color:'white'}}>{withdraw.status}</p></td>
+               
+              </tr>
+                    </>
+                  )
+                })
+              }
+              {/* <tr>
+                <td><p style={{color:'red'}}>1</p></td>
+                <td><p style={{color:'red'}}>2</p></td>
+                <td><p style={{color:'red'}}>3</p></td>
+                <td><p style={{color:'red'}}>4</p></td>
+                <td><p style={{color:'red'}}>5</p></td>
+               
+              </tr>
+              <tr>
+                <td><p style={{color:'red'}}>1</p></td>
+                <td><p style={{color:'red'}}>2</p></td>
+                <td><p style={{color:'red'}}>3</p></td>
+                <td><p style={{color:'red'}}>4</p></td>
+                <td><p style={{color:'red'}}>5</p></td>
+               
+              </tr>
+              <tr>
+                <td><p style={{color:'red'}}>1</p></td>
+                <td><p style={{color:'red'}}>2</p></td>
+                <td><p style={{color:'red'}}>3</p></td>
+                <td><p style={{color:'red'}}>4</p></td>
+                <td><p style={{color:'red'}}>5</p></td>
+               
+              </tr> */}
+             
+              {/* {userTransaction ? <h1 className={`text-black`}>Hello</h1> : <p>There is no list</p>} */}
             </tbody>
           </table>
         </div>
