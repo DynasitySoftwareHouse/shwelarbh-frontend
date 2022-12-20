@@ -16,11 +16,11 @@ function Transition() {
   const [userTransaction, setUserTransaction] = useState({});
   const [withdrawHistory, setWithdrawHistory] = useState([]);
 
-  const Approve = "approve";
-  const Pending = "pending";
-  const Reject = "receiver-rejected";
-  const Complete = "complete";
-  const Rejected = "rejected";
+  // const Approve = "approve";
+  // const Pending = "pending";
+  // const Reject = "receiver-rejected";
+  // const Complete = "complete";
+  // const Rejected = "rejected";
 
   const userData = useContext(UserContext);
 
