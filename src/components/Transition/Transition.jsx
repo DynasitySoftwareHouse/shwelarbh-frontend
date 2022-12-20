@@ -12,6 +12,10 @@ import lToken from "../../services/Token";
 function Transition() {
   const { VITE_APP_DOMAIN } = import.meta.env;
 
+  const [histories, setHistories] = useState([]);
+  const [depositActive, setDepositActive] = useState(false);
+  const [withdrawActive, setWithdrawActive] = useState(false);
+
   const [userTransaction, setUserTransaction] = useState({});
   const [withdrawHistory, setWithdrawHistory] = useState([]);
   console.log(withdrawHistory);
@@ -52,7 +56,7 @@ function Transition() {
         },
       })
       .then((response) => {
-        setWithdrawHistory(response.data.data);
+        setWithdrawHistory(response.data);
 
         if (response.data.status === "success") {
           console.log(response.data.message);
@@ -64,6 +68,24 @@ function Transition() {
       });
   }, [`${VITE_APP_DOMAIN}/api/user-withdraw?receive user_id=${userData?.user_id}`]);
 
+  const depositHandler = () => {
+    setHistories([]);
+    setHistories(userTransaction);
+    setDepositActive(true);
+    setWithdrawActive(false);
+
+    console.log("deposit");
+  };
+
+  const withdrawHandler = () => {
+    setHistories([]);
+    setHistories(withdrawHistory);
+    setWithdrawActive(true);
+    setDepositActive(false);
+
+    console.log("withdraw");
+  };
+
   return (
     <div className={style.mainContainer}>
       <div className="pt-10">
@@ -74,8 +96,16 @@ function Transition() {
           </p>
         </div>
         <div className="flex justify-center items-center">
-          <button className={`btn active bg-green-600 text-white m-3`}>Deposit histories</button>
-          <button className={`btn bg-green-600 text-white m-3`}>Withdraw histories</button>
+          <button
+            onClick={depositHandler}
+            className={`btn ${depositActive ? "active" : ""} bg-green-600 text-white m-3`}>
+            Deposit histories
+          </button>
+          <button
+            onClick={withdrawHandler}
+            className={`btn ${withdrawActive ? "active" : ""} bg-green-600 text-white m-3`}>
+            Withdraw histories
+          </button>
         </div>
         <div className={`${style.list} `}>
           <table className={`w-full bg-slate-100 table text-white`}>
@@ -89,9 +119,9 @@ function Transition() {
               </tr>
             </thead>
             <tbody>
-              //This is kaung commit deposit history
-              {userTransaction ? (
-                userTransaction?.data?.map((item) => (
+              {/* //This is kaung commit deposit history */}
+              {histories ? (
+                histories?.data?.map((item) => (
                   <tr key={item.id}>
                     <td style={{ maxHeight: "50px" }}>{item.account_no}</td>
                     <td style={{ maxHeight: "50px" }}>{item.amount}</td>
@@ -101,7 +131,9 @@ function Transition() {
                     </td>
                     <td
                       style={{ maxHeight: "50px" }}
-                      className={`${item.status === "approve" ? "text-lime-600" : "text-red-600"}`}>
+                      className={`${
+                        item.status === "approve" || "complete" ? "text-lime-600" : "text-red-600"
+                      }`}>
                       {item.status}
                     </td>
                   </tr>
@@ -109,8 +141,8 @@ function Transition() {
               ) : (
                 <p>There is no list</p>
               )}
-              //This is thazin commit withdraw history
-              {withdrawHistory.map((withdraw) => {
+              {/* //This is thazin commit withdraw history */}
+              {/* {withdrawHistory.map((withdraw) => {
                 return (
                   <>
                     <tr>
@@ -118,7 +150,7 @@ function Transition() {
                         <p style={{ color: "white" }}>{withdraw.account_no}</p>
                       </td>
                       <td>
-                        <p style={{ color: "white" }}>-{withdraw.amount}</p>
+                        <p style={{ color: "white" }}>{withdraw.amount}</p>
                       </td>
                       <td>
                         <p style={{ color: "white" }}>{withdraw.payment_provider_name}</p>
@@ -139,7 +171,7 @@ function Transition() {
                     </tr>
                   </>
                 );
-              })}
+              })} */}
               {/* <tr>
                 <td><p style={{color:'red'}}>1</p></td>
                 <td><p style={{color:'red'}}>2</p></td>
