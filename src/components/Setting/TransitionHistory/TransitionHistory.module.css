@@ -6,3 +6,7 @@
   height: 100vh;
   padding-top: 20px;
 }
+.tableContainer {
+  width: 100vw;
+  overflow-y: auto;
+}
