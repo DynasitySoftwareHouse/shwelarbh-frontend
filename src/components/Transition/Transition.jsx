@@ -18,73 +18,78 @@ function Transition() {
 
   const [userTransaction, setUserTransaction] = useState({});
   const [withdrawHistory, setWithdrawHistory] = useState([]);
-  console.log(withdrawHistory);
+
+  const Approve = "approve";
+  const Pending = "pending";
+  const Reject = "receiver-rejected";
+  const Complete = "complete";
+  const Rejected = "rejected";
 
   const userData = useContext(UserContext);
 
   //this is kaung commit deposit history api fetch
-  useEffect(() => {
-    axios
-      .get(`${VITE_APP_DOMAIN}/api/deposit-histories?sortColumn=id&sortDirection=desc&limit=20`, {
-        methods: "GET",
-        headers: {
-          authorization: lToken,
-          accept: "application/json",
-        },
-      })
-      .then((response) => {
-        setUserTransaction(response.data);
-        console.log(response);
-        if (response.data.status === "success") {
-          console.log(response.data.message);
-          // console.log(response);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`${VITE_APP_DOMAIN}/api/deposit-histories?sortColumn=id&sortDirection=desc&limit=20`, {
+  //       methods: "GET",
+  //       headers: {
+  //         authorization: lToken,
+  //         accept: "application/json",
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setUserTransaction(response.data);
+  //       console.log(response);
+  //       if (response.data.status === "success") {
+  //         console.log(response.data.message);
+  //         // console.log(response);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
-  //this is thazin commit withdraw history api fetch
-  useEffect(() => {
-    axios
-      .get(`${VITE_APP_DOMAIN}/api/user-withdraw?receive user_id=${userData?.user_id}`, {
-        method: "GET",
-        headers: {
-          authorization: lToken,
-          accept: "application/json",
-        },
-      })
-      .then((response) => {
-        setWithdrawHistory(response.data);
+  // //this is thazin commit withdraw history api fetch
+  // useEffect(() => {
+  //   axios
+  //     .get(`${VITE_APP_DOMAIN}/api/user-withdraw?receive user_id=${userData?.user_id}`, {
+  //       method: "GET",
+  //       headers: {
+  //         authorization: lToken,
+  //         accept: "application/json",
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setWithdrawHistory(response.data);
 
-        if (response.data.status === "success") {
-          console.log(response.data.message);
-          // console.log(response);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [`${VITE_APP_DOMAIN}/api/user-withdraw?receive user_id=${userData?.user_id}`]);
+  //       if (response.data.status === "success") {
+  //         console.log(response.data.message);
+  //         // console.log(response);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, [`${VITE_APP_DOMAIN}/api/user-withdraw?receive user_id=${userData?.user_id}`]);
 
-  const depositHandler = () => {
-    setHistories([]);
-    setHistories(userTransaction);
-    setDepositActive(true);
-    setWithdrawActive(false);
+  // const depositHandler = () => {
+  //   setHistories([]);
+  //   setHistories(userTransaction);
+  //   setDepositActive(true);
+  //   setWithdrawActive(false);
 
-    console.log("deposit");
-  };
+  //   console.log("deposit");
+  // };
 
-  const withdrawHandler = () => {
-    setHistories([]);
-    setHistories(withdrawHistory);
-    setWithdrawActive(true);
-    setDepositActive(false);
+  // const withdrawHandler = () => {
+  //   setHistories([]);
+  //   setHistories(withdrawHistory);
+  //   setWithdrawActive(true);
+  //   setDepositActive(false);
 
-    console.log("withdraw");
-  };
+  //   console.log("withdraw");
+  // };
 
   return (
     <div className={style.mainContainer}>
@@ -97,12 +102,64 @@ function Transition() {
         </div>
         <div className="flex justify-center items-center">
           <button
-            onClick={depositHandler}
+            onClick={() => {
+              axios
+                .get(
+                  `${VITE_APP_DOMAIN}/api/deposit-histories?sortColumn=id&sortDirection=desc&limit=20`,
+                  {
+                    methods: "GET",
+                    headers: {
+                      authorization: lToken,
+                      accept: "application/json",
+                    },
+                  }
+                )
+                .then((response) => {
+                  setUserTransaction(response.data);
+                  console.log(response);
+                  if (response.data.status === "success") {
+                    console.log(response.data.message);
+                    // console.log(response);
+                  }
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+              setHistories([]);
+              setHistories(userTransaction);
+              setDepositActive(true);
+              setWithdrawActive(false);
+            }}
             className={`btn ${depositActive ? "active" : ""} bg-green-600 text-white m-3`}>
             Deposit histories
           </button>
           <button
-            onClick={withdrawHandler}
+            onClick={() => {
+              axios
+                .get(`${VITE_APP_DOMAIN}/api/user-withdraw?receive user_id=${userData?.user_id}`, {
+                  method: "GET",
+                  headers: {
+                    authorization: lToken,
+                    accept: "application/json",
+                  },
+                })
+                .then((response) => {
+                  setWithdrawHistory(response.data);
+
+                  if (response.data.status === "success") {
+                    console.log(response.data.message);
+                    // console.log(response);
+                  }
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+
+              setHistories([]);
+              setHistories(withdrawHistory);
+              setWithdrawActive(true);
+              setDepositActive(false);
+            }}
             className={`btn ${withdrawActive ? "active" : ""} bg-green-600 text-white m-3`}>
             Withdraw histories
           </button>
@@ -131,9 +188,13 @@ function Transition() {
                     </td>
                     <td
                       style={{ maxHeight: "50px" }}
-                      className={`${
-                        item.status === "approve" || "complete" ? "text-lime-600" : "text-red-600"
-                      }`}>
+                      className={`
+                      ${
+                        item.status === "approve" || item.status === "complete"
+                          ? "text-lime-600"
+                          : "text-red-600"
+                      }
+                      `}>
                       {item.status}
                     </td>
                   </tr>
