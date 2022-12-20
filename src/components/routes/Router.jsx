@@ -59,6 +59,7 @@ function Router() {
         <Route exact index path="/" element={<Login />}></Route>
         <Route exact path="/signup" element={<SignUp />}></Route>
         <Route exact path="/home" element={<Home />}></Route>
+        <Route exact path="/about" element={<About />}></Route>
         <Route exact path="/forgot_password" element={<ForgotPassword />}></Route>
 
         {/* football betting */}
