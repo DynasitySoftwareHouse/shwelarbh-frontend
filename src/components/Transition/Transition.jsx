@@ -2,9 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import style from "./Transition.module.css";
 import axios from "axios";
 
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-
 import { UserContext } from "../routes/Router";
 
 import lToken from "../../services/Token";
@@ -188,13 +185,11 @@ function Transition() {
                     </td>
                     <td
                       style={{ maxHeight: "50px" }}
-                      className={`
-                      ${
-                        item.status === "approve" || item.status === "complete"
+                      className={`${
+                        item.status === "complete" || item.status === "approve"
                           ? "text-lime-600"
                           : "text-red-600"
-                      }
-                      `}>
+                      }`}>
                       {item.status}
                     </td>
                   </tr>
