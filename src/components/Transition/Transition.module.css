@@ -35,3 +35,8 @@
 .list table {
   text-align: center;
 }
+@media (min-width: 900px) {
+  .mainContainer {
+    height: auto;
+  }
+}
