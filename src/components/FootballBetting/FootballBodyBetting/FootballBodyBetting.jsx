@@ -62,7 +62,7 @@ function FootballBodyBetting() {
           match?.map((item) => (
             <div className={`bg-slate-300 w-11/12 rounded-lg mt-3`}>
               <div className={`text-white rounded-lg mb-3 py-1 text-center bg-red-600`}>
-                {new Date(item.mm_football_category.created_at).toLocaleString()}
+                {new Date(Number(item.fixture_timestamp)).toLocaleString()}
               </div>
               <ToggleButtonGroup
                 style={{
@@ -87,9 +87,11 @@ function FootballBodyBetting() {
                     borderRadius: "3px ",
                     margin: "1px",
                   }}>
-                  {item?.over_team_data.team_type === "home"
-                    ? item?.over_team_data?.name
-                    : item?.under_team_data?.name}
+                  {`${
+                    item?.over_team_data.team_type === "home"
+                      ? item?.over_team_data?.name
+                      : item?.under_team_data?.name
+                  }` + `${" (" + item.body + ")"}`}
                 </ToggleButton>
                 <ToggleButton
                   value="right"
@@ -102,9 +104,11 @@ function FootballBodyBetting() {
                     borderRadius: "3px ",
                     margin: "1px",
                   }}>
-                  {item?.under_team_data.team_type === "away"
-                    ? item?.under_team_data?.name
-                    : item?.over_team_data?.name}
+                  {`${
+                    item?.under_team_data.team_type === "away"
+                      ? item?.under_team_data?.name
+                      : item?.over_team_data?.name
+                  }`}
                 </ToggleButton>
                 <ToggleButton
                   value="home"
@@ -117,9 +121,40 @@ function FootballBodyBetting() {
                     borderRadius: "3px ",
                     margin: "1px",
                   }}>
-                  <h1>hello</h1>
+                  {item?.over_team_data.team_type === "home" ? (
+                    <p className={`text-lime-600 flex `}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        style={{ width: "12px", marginRight: "10px" }}
+                        fill="green"
+                        viewBox="0 0 384 512">
+                        <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" />
+                      </svg>{" "}
+                      Over
+                    </p>
+                  ) : (
+                    <p className={`text-red-600 flex`}>
+                      Under{" "}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="red"
+                        style={{ width: "12px", marginLeft: "10px" }}
+                        viewBox="0 0 384 512">
+                        <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                      </svg>{" "}
+                    </p>
+                  )}
                 </ToggleButton>
-                <div style={{ width: "15vw" }}></div>
+                <div
+                  className={`text-center flex justify-center items-center text-black`}
+                  style={{
+                    width: "15vw",
+                    height: "48px",
+                    borderColor: "#7f7f7f",
+                    borderWidth: "1px",
+                  }}>
+                  {item.total}
+                </div>
                 <ToggleButton
                   value="away"
                   aria-label="away aligned"
@@ -131,7 +166,29 @@ function FootballBodyBetting() {
                     borderRadius: "3px ",
                     margin: "1px",
                   }}>
-                  <h1>Hello</h1>
+                  {item?.under_team_data.team_type === "away" ? (
+                    <p className={`text-red-600 flex`}>
+                      Under{" "}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        style={{ width: "12px", marginLeft: "10px" }}
+                        fill="red"
+                        viewBox="0 0 384 512">
+                        <path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                      </svg>{" "}
+                    </p>
+                  ) : (
+                    <p className={`text-lime-600 flex`}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="green"
+                        style={{ width: "12px", marginRight: "10px" }}
+                        viewBox="0 0 384 512">
+                        <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z" />
+                      </svg>{" "}
+                      Over
+                    </p>
+                  )}
                 </ToggleButton>
               </ToggleButtonGroup>
             </div>
@@ -153,7 +210,7 @@ function FootballBodyBetting() {
           //     </ToggleButton>
           //   </ToggleButtonGroup>
           // </div>
-          <p className={`text-red-600`}>No Match</p>
+          <p className={`text-red-600 m-auto`}>No Match</p>
         )}
       </div>
       <div className=" fixed bottom-0 pb-2 bg-slate-800 w-full h-16 pt-2">
