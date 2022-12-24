@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./FootballResult.module.css";
 
 // MUI
@@ -7,8 +7,36 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
+import lToken from "../../../services/Token";
+import axios from "axios";
+
 function FootballResult() {
+  const { VITE_APP_DOMAIN } = import.meta.env;
+
+  useEffect(() => {
+    axios
+      .get(
+        `${VITE_APP_DOMAIN}/api/football-fixtures?source=dashboard&sortColumn=id&sortDirection=desc&limit=10&mm_football_category=body_total`,
+        {
+          method: "GET",
+          headers: {
+            accept: "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        if (response.status === "success") {
+          console.log("success");
+          console.log(response);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const [value, setValue] = React.useState(null);
+  // console.log(new Date(value.$d).toLocaleDateString("fr-CA"));
 
   return (
     <>
