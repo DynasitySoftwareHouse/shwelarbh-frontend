@@ -57,12 +57,20 @@ function FootballBodyBetting() {
       <div className="text-end p-2">
         <p>ဘော်ဒီ/ဂိုးပေါင်း</p>
       </div>
-      <div className="flex justify-center items-center mt-72">
+      <div className="flex flex-col justify-center items-center">
         {match.length ? (
           match?.map((item) => (
-            <div className={`bg-slate-300 p-3 w-11/12 rounded-lg`}>
+            <div className={`bg-slate-300 w-11/12 rounded-lg mt-3`}>
+              <div className={`text-white rounded-lg mb-3 py-1 text-center bg-red-600`}>
+                {new Date(item.mm_football_category.created_at).toLocaleString()}
+              </div>
               <ToggleButtonGroup
-                style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                  paddingBottom: "10px",
+                }}
                 color="primary"
                 value={alignment}
                 exclusive
@@ -75,11 +83,13 @@ function FootballBodyBetting() {
                     fontSize: "12px",
                     width: "40vw",
                     borderWidth: "1px",
-                    borderColor: "#000",
+                    borderColor: "#7f7f7f",
+                    borderRadius: "3px ",
+                    margin: "1px",
                   }}>
                   {item?.over_team_data.team_type === "home"
-                    ? item?.over_team_data.name
-                    : item?.Under_team_data.name}
+                    ? item?.over_team_data?.name
+                    : item?.under_team_data?.name}
                 </ToggleButton>
                 <ToggleButton
                   value="right"
@@ -88,28 +98,38 @@ function FootballBodyBetting() {
                     fontSize: "12px",
                     width: "40vw",
                     borderWidth: "1px",
-                    borderColor: "#000",
+                    borderColor: "#7f7f7f",
+                    borderRadius: "3px ",
+                    margin: "1px",
                   }}>
                   {item?.under_team_data.team_type === "away"
-                    ? item?.under_team_data.name
-                    : item?.over_team_data.name}
+                    ? item?.under_team_data?.name
+                    : item?.over_team_data?.name}
                 </ToggleButton>
                 <ToggleButton
+                  value="home"
+                  aria-label="home aligned"
                   style={{
                     fontSize: "12px",
                     width: "30vw",
                     borderWidth: "1px",
-                    borderColor: "#000",
+                    borderColor: "#7f7f7f",
+                    borderRadius: "3px ",
+                    margin: "1px",
                   }}>
-                  <h1>Hello</h1>
+                  <h1>hello</h1>
                 </ToggleButton>
                 <div style={{ width: "15vw" }}></div>
                 <ToggleButton
+                  value="away"
+                  aria-label="away aligned"
                   style={{
                     fontSize: "12px",
                     width: "30vw",
                     borderWidth: "1px",
-                    borderColor: "#000",
+                    borderColor: "#7f7f7f",
+                    borderRadius: "3px ",
+                    margin: "1px",
                   }}>
                   <h1>Hello</h1>
                 </ToggleButton>
