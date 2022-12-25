@@ -27,6 +27,8 @@ import ChangePassword from "../Setting/Profile/Change Password/ChangePassword";
 import ConnectAgent from "../Setting/Profile/ConnectAgent/ConnectAgent";
 import Deposit from "../Transition/Deposit/Deposit";
 import Withdraw from "../Transition/Withdraw/Withdraw";
+import XMoung from "../FootballBetting/XMoung/XMoung";
+import DonneMoung from "../FootballBetting/DonneMoung/DonneMoung";
 // import DepositForm from "../Transition/Deposit/DepositForm/DepositForm";
 // import WithdrawForm from "../Transition/Withdraw/WithdrawForm/WithdrawForm";
 
@@ -65,6 +67,8 @@ function Router() {
         {/* football betting */}
         <Route path="/footballbetting" element={<FootballBetting />}></Route>
         <Route path="/footballbetting/body_betting" element={<FootballBodyBetting />}></Route>
+        <Route path="/footballbetting/xmoung_betting" element={<XMoung />}></Route>
+        <Route path="/footballbetting/donne-moung_betting" element={<DonneMoung />}></Route>
         <Route path="/footballbetting/football_result" element={<FootballResult />}></Route>
         <Route path="/footballbetting/current_bet_history" element={<CurrentBetHistory />}></Route>
 

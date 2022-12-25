@@ -265,7 +265,7 @@ function FootballBodyBetting() {
           //     </ToggleButton>
           //   </ToggleButtonGroup>
           // </div>
-          <p className={`text-red-600 m-auto mt-52`}>No Match</p>
+          <p className={`text-red-600 m-auto mt-72 text-xl font-bold`}>No Match</p>
         )}
       </div>
       <div className=" fixed bottom-0 pb-2 bg-slate-800 w-full h-16 pt-2">
