@@ -78,6 +78,7 @@ function Router() {
         <Route path="setting/profile" element={<Profile />}></Route>
         <Route path="setting/profile/changepassword" element={<ChangePassword />}></Route>
         <Route path="/setting/profile/connectagent" element={<ConnectAgent />}></Route>
+        <Route path="/setting/color_description" element={<ColorDescription />}></Route>
         <Route path="/setting/transition" element={<TransitionHistory />}></Route>
         {/* 2d */}
         <Route path="/myanmar2d" element={<Myanmar2d />}></Route>
