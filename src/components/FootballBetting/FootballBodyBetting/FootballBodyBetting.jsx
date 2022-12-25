@@ -14,13 +14,14 @@ import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import moment from "moment";
+import lToken from "../../../services/Token";
 
 function FootballBodyBetting() {
   const MySwal = withReactContent(Swal);
   const [alignment, setAlignment] = React.useState("");
   const [home, setHome] = useState({});
   const [away, setAway] = useState({});
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("");
 
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
@@ -75,6 +76,8 @@ function FootballBodyBetting() {
   console.log(match);
   // console.log(home);
   console.log(alignment);
+  console.log(Math.abs(Number(alignment.slice(alignment.search("-"), alignment.search("_")))));
+  console.log(Number(alignment.slice(alignment.search("_")).slice(1)));
   // api/football-bettings    api for submit betting
   return (
     <div className={style.mainContainer}>
@@ -115,7 +118,9 @@ function FootballBodyBetting() {
                         : item?.under_team_data?.name
                     }` +
                     `-` +
-                    `${item.fixture_id}`
+                    `${item.id}` +
+                    "_" +
+                    `${item?.mm_football_category.id}`
                   }
                   aria-label="left aligned"
                   style={{
@@ -140,7 +145,9 @@ function FootballBodyBetting() {
                         : item?.over_team_data?.name
                     }` +
                     `-` +
-                    `${item.fixture_id}`
+                    `${item.id}` +
+                    "_" +
+                    `${item?.mm_football_category.id}`
                   }
                   aria-label="right aligned"
                   style={{
@@ -159,9 +166,11 @@ function FootballBodyBetting() {
                 </ToggleButton>
                 <ToggleButton
                   value={
-                    `${item?.over_team_data.team_type === "home" ? "Over" : "Under"}` +
+                    `${item?.over_team_data.team_type === "home" ? "over" : "under"}` +
                     `-` +
-                    `${item.fixture_id}`
+                    `${item.id}` +
+                    "_" +
+                    `${item?.mm_football_category?.id}`
                   }
                   aria-label="home aligned"
                   style={{
@@ -208,9 +217,11 @@ function FootballBodyBetting() {
                 </div>
                 <ToggleButton
                   value={
-                    `${item?.under_team_data.team_type === "away" ? "Under" : "Over"}` +
+                    `${item?.under_team_data.team_type === "away" ? "under" : "over"}` +
                     `-` +
-                    `${item.fixture_id}`
+                    `${item.id}` +
+                    "_" +
+                    `${item?.mm_football_category.id}`
                   }
                   aria-label="away aligned"
                   style={{
@@ -314,33 +325,67 @@ function FootballBodyBetting() {
                 "aria-labelledby": "basic-button",
               }}>
               <form action="" className={`form-control`}>
+                <p className={`text-lg px-10 pt-5 font-bold`}>Bet Slip</p>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td className={`px-5`}>ထိုးမည့်အသင်း</td>
+                      <td>
+                        <p className={`py-3`}>{alignment.substring(0, alignment.search("-"))}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className={`px-5`}>ထိုးမည့်ပမာဏ</td>
+                      <td>
+                        <p className={`px-10 py-3`}>{amount}</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
                 <button
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     axios
                       .post(
                         `${VITE_APP_DOMAIN}/api/football-bettings`,
                         {
-                          amounts: { amount },
+                          amount: Number(amount),
                           bet_fixtures: [
                             {
                               football_fixture_id: Math.abs(
-                                Number(alignment.slice(alignment.search("-")))
+                                Number(
+                                  alignment.slice(alignment.search("-"), alignment.search("_"))
+                                )
                               ),
-                              bet_team: "over",
+                              bet_team: alignment.substring(0, alignment.search("-")),
                               bet_type: "body",
+                              // `${
+                              //   alignment.substring(0, alignment.search("-")) === "over"
+                              //     ? "over"
+                              //     : alignment.substring(0, alignment.search("-"))
+                              // }` ||
+                              // `${
+                              //   alignment.substring(0, alignment.search("-")) === "under"
+                              //     ? "under"
+                              //     : alignment.substring(0, alignment.search("-"))
+                              // }`,
                             },
                           ],
-                          mm_football_category_id: 2,
+                          mm_football_category_id: Number(
+                            alignment.slice(alignment.search("_")).slice(1)
+                          ),
                         },
                         {
                           method: "POST",
                           headers: {
+                            authorization: lToken,
                             accept: "application/json",
                           },
                         }
                       )
                       .then((response) => {
-                        if (response.status === "success") {
+                        if (response.data.status === "success") {
                           MySwal.fire({
                             title: <p className="text-lime-600">Success</p>,
                             text: "Betting Success",
@@ -348,6 +393,7 @@ function FootballBodyBetting() {
                             confirmButtonText: "ok",
                           });
                           console.log("success");
+                          handleClose();
                         }
                       })
                       .catch((error) => {
