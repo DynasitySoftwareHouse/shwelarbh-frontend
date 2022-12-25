@@ -58,7 +58,7 @@ function Setting(props) {
           </div>
           {/* Color Description */}
           <div>
-            <a href="" className="btn bg-transparent m-5 w-72">
+            <a href="/setting/color_description" className="btn bg-transparent m-5 w-72">
               Color Description
             </a>
           </div>

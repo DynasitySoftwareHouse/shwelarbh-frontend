@@ -27,6 +27,8 @@ import ChangePassword from "../Setting/Profile/Change Password/ChangePassword";
 import ConnectAgent from "../Setting/Profile/ConnectAgent/ConnectAgent";
 import Deposit from "../Transition/Deposit/Deposit";
 import Withdraw from "../Transition/Withdraw/Withdraw";
+import XMoung from "../FootballBetting/XMoung/XMoung";
+import DonneMoung from "../FootballBetting/DonneMoung/DonneMoung";
 // import DepositForm from "../Transition/Deposit/DepositForm/DepositForm";
 // import WithdrawForm from "../Transition/Withdraw/WithdrawForm/WithdrawForm";
 
@@ -65,6 +67,8 @@ function Router() {
         {/* football betting */}
         <Route path="/footballbetting" element={<FootballBetting />}></Route>
         <Route path="/footballbetting/body_betting" element={<FootballBodyBetting />}></Route>
+        <Route path="/footballbetting/xmoung_betting" element={<XMoung />}></Route>
+        <Route path="/footballbetting/donne-moung_betting" element={<DonneMoung />}></Route>
         <Route path="/footballbetting/football_result" element={<FootballResult />}></Route>
         <Route path="/footballbetting/current_bet_history" element={<CurrentBetHistory />}></Route>
 
@@ -74,6 +78,7 @@ function Router() {
         <Route path="setting/profile" element={<Profile />}></Route>
         <Route path="setting/profile/changepassword" element={<ChangePassword />}></Route>
         <Route path="/setting/profile/connectagent" element={<ConnectAgent />}></Route>
+        <Route path="/setting/color_description" element={<ColorDescription />}></Route>
         <Route path="/setting/transition" element={<TransitionHistory />}></Route>
         {/* 2d */}
         <Route path="/myanmar2d" element={<Myanmar2d />}></Route>
