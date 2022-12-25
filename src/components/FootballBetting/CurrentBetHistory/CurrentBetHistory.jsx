@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "./CurrentBetHistory.module.css";
 // MUI
 import TextField from "@mui/material/TextField";
@@ -7,10 +7,55 @@ import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 
+import axios from "axios";
+import lToken from "../../../services/Token";
+
 import resultBanner from "../../../assets/history.jpeg";
 
 function FootballResult() {
-  const [value, setValue] = React.useState([null, null]);
+  const { VITE_APP_DOMAIN } = import.meta.env;
+  // useEffect(() => {
+  //   axios
+  //   .get(`${VITE_APP_DOMAIN}/api/football-bettings/bet-user-table-report?start_date=2022-09-03&end_date=2022-10-29&status` ,
+  //   {
+  //     methods: "GET",
+  //     headers:{
+  //       authorization: lToken,
+  //       accept: 'application/json'
+  //     },
+  //   }
+  //   ).then((response)=>{
+  //     if (response.data.status ==='success') {
+  //       console.log('success')
+  //     }
+  //   }).catch((error)=> {
+  //     console.log(error)
+  //   })
+  // }, []);
+
+  useEffect(() => {
+    axios
+      .get(
+        `${VITE_APP_DOMAIN}/api/football-bettings/bet-user-table-report?start_date=2022-12-25&end_date=2022-12-25&status`,
+        {
+          methods: "GET",
+          headers: {
+            authorization: lToken,
+            accept: "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        if (response.data.status === "success") {
+          console.log("success");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const [value, setValue] = useState([null, null]);
 
   return (
     <div className={style.mainContainer}>
