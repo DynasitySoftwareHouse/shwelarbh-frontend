@@ -174,7 +174,7 @@ function Transition() {
             </thead>
             <tbody>
               {/* //This is kaung commit deposit history */}
-              {histories ? (
+              {histories.length ? (
                 histories?.data?.map((item) => (
                   <tr key={item.id}>
                     <td style={{ maxHeight: "50px" }}>{item.account_no}</td>
@@ -195,7 +195,9 @@ function Transition() {
                   </tr>
                 ))
               ) : (
-                <p>There is no list</p>
+                <td colSpan="5" className={`bg-transparent py-56 bg text-black`}>
+                  There is no list
+                </td>
               )}
               {/* //This is thazin commit withdraw history */}
               {/* {withdrawHistory.map((withdraw) => {

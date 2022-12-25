@@ -159,7 +159,7 @@ function Home() {
               {/* setting section */}
               <div>
                 <div className="md:mt-7">
-                  <a href="/shwelarb">
+                  <a href="/about">
                     <img src={shwelarb} alt="" className="w-28 rounded-3xl bg-slate-900" />
                   </a>
                 </div>
