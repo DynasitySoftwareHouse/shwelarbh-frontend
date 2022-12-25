@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import style from "./FootballBodyBetting.module.css";
 import axios from "axios";
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
 import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
@@ -8,18 +13,37 @@ import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import moment from "moment";
 
 function FootballBodyBetting() {
+  const MySwal = withReactContent(Swal);
   const [alignment, setAlignment] = React.useState("");
   const [home, setHome] = useState({});
   const [away, setAway] = useState({});
+  const [amount, setAmount] = useState(0);
 
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
   };
 
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const amountBetHandler = (e) => {
+    setAmount(e.target.value);
+  };
+
   const { VITE_APP_DOMAIN } = import.meta.env;
   const [match, setMatch] = useState([]);
+
+  // const idHandler = () => {
+  //   return Math.abs(Number(alignment.slice(alignment.search("-"))));
+  // };
+  // idHandler();
+
   useEffect(() => {
     axios
       .get(
@@ -50,7 +74,7 @@ function FootballBodyBetting() {
   }, []);
   console.log(match);
   // console.log(home);
-
+  console.log(alignment);
   // api/football-bettings    api for submit betting
   return (
     <div className={style.mainContainer}>
@@ -61,8 +85,15 @@ function FootballBodyBetting() {
         {match.length ? (
           match?.map((item) => (
             <div className={`bg-slate-300 w-11/12 rounded-lg mt-3`}>
-              <div className={`text-white rounded-lg mb-3 py-1 text-center bg-red-600`}>
-                {new Date(Number(item.fixture_timestamp)).toLocaleString()}
+              <div className={`h-10 bg-slate-800 text-white flex justify-center items-center`}>
+                <p style={{ marginRight: "10px" }}>{item.league_data.country}</p>
+                <p>{item.league_data.name}</p>
+              </div>
+              <div className={`text-white flex justify-center  mb-3 py-1 text-center bg-red-600`}>
+                {/* {new Date(Number(item.fixture_timestamp)).toLocaleString()} */}
+                {/* မနက်ဖြန်ကျရင် ဆက်လုပ်ရမယ်  */}
+                <div style={{ marginRight: "10px" }}>ပွဲချိန်</div>
+                {moment(Number(item?.fixture_timestamp)).format("lll")}
               </div>
               <ToggleButtonGroup
                 style={{
@@ -77,7 +108,15 @@ function FootballBodyBetting() {
                 onChange={handleAlignment}
                 aria-label="text alignment">
                 <ToggleButton
-                  value="left"
+                  value={
+                    `${
+                      item?.over_team_data.team_type === "home"
+                        ? item?.over_team_data?.name
+                        : item?.under_team_data?.name
+                    }` +
+                    `-` +
+                    `${item.fixture_id}`
+                  }
                   aria-label="left aligned"
                   style={{
                     fontSize: "12px",
@@ -94,7 +133,15 @@ function FootballBodyBetting() {
                   }` + `${" (" + item.body + ")"}`}
                 </ToggleButton>
                 <ToggleButton
-                  value="right"
+                  value={
+                    `${
+                      item?.under_team_data.team_type === "away"
+                        ? item?.under_team_data?.name
+                        : item?.over_team_data?.name
+                    }` +
+                    `-` +
+                    `${item.fixture_id}`
+                  }
                   aria-label="right aligned"
                   style={{
                     fontSize: "12px",
@@ -111,7 +158,11 @@ function FootballBodyBetting() {
                   }`}
                 </ToggleButton>
                 <ToggleButton
-                  value="home"
+                  value={
+                    `${item?.over_team_data.team_type === "home" ? "Over" : "Under"}` +
+                    `-` +
+                    `${item.fixture_id}`
+                  }
                   aria-label="home aligned"
                   style={{
                     fontSize: "12px",
@@ -156,7 +207,11 @@ function FootballBodyBetting() {
                   {item.total}
                 </div>
                 <ToggleButton
-                  value="away"
+                  value={
+                    `${item?.under_team_data.team_type === "away" ? "Under" : "Over"}` +
+                    `-` +
+                    `${item.fixture_id}`
+                  }
                   aria-label="away aligned"
                   style={{
                     fontSize: "12px",
@@ -210,17 +265,108 @@ function FootballBodyBetting() {
           //     </ToggleButton>
           //   </ToggleButtonGroup>
           // </div>
-          <p className={`text-red-600 m-auto`}>No Match</p>
+          <p className={`text-red-600 m-auto mt-52`}>No Match</p>
         )}
       </div>
       <div className=" fixed bottom-0 pb-2 bg-slate-800 w-full h-16 pt-2">
         <div className="form-group flex justify-around h-12">
           <p className="w-36">ထိုးမည့်ပမာဏကိုထည့်ပါ</p>
           <input
+            value={amount}
+            onChange={amountBetHandler}
             type="number"
             className="form-control text-center text-black rounded-xl mr-1 sm:w-52 md:w-full bg-slate-200"
           />
-          <button className="btn rounded-full border bg-red-600 text-white">Submit</button>
+          <button
+            className={`bg-red-600 text-white`}
+            style={{ width: "100px", borderRadius: "15px" }}>
+            <Button
+              style={{
+                width: "50px",
+                height: "50px",
+              }}
+              id="basic-button"
+              aria-controls={open ? "basic-menu" : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+              onClick={(e, id) => {
+                if (amount === 0 || amount === "") {
+                  handleClose();
+                  MySwal.fire({
+                    title: <p className="text-red-600">Error</p>,
+                    text: "Please Fill Bet Amount",
+                    icon: "error",
+                    confirmButtonText: "ok",
+                  });
+                }
+                setAnchorEl(event.currentTarget);
+                e.preventDefault();
+              }}>
+              <p className={`text-white`}>ထိုးမည်</p>
+            </Button>
+
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}>
+              <form action="" className={`form-control`}>
+                <button
+                  onClick={() => {
+                    axios
+                      .post(
+                        `${VITE_APP_DOMAIN}/api/football-bettings`,
+                        {
+                          amounts: { amount },
+                          bet_fixtures: [
+                            {
+                              football_fixture_id: Math.abs(
+                                Number(alignment.slice(alignment.search("-")))
+                              ),
+                              bet_team: "over",
+                              bet_type: "body",
+                            },
+                          ],
+                          mm_football_category_id: 2,
+                        },
+                        {
+                          method: "POST",
+                          headers: {
+                            accept: "application/json",
+                          },
+                        }
+                      )
+                      .then((response) => {
+                        if (response.status === "success") {
+                          MySwal.fire({
+                            title: <p className="text-lime-600">Success</p>,
+                            text: "Betting Success",
+                            icon: "success",
+                            confirmButtonText: "ok",
+                          });
+                          console.log("success");
+                        }
+                      })
+                      .catch((error) => {
+                        MySwal.fire({
+                          title: <p className="text-red-600">Error</p>,
+                          text: error?.response?.data?.message,
+                          icon: "error",
+                          confirmButtonText: "ok",
+                        });
+                        handleClose();
+                        console.log(error?.response?.data?.message);
+                      });
+                  }}
+                  className={`btn bg-teal-300 text-black w-10/12 m-auto mt-2`}>
+                  Confirm
+                </button>
+              </form>
+            </Menu>
+          </button>
         </div>
       </div>
     </div>
