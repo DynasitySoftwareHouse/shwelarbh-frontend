@@ -41,7 +41,7 @@ function TransitionHistory() {
             </tr>
           </thead>
           <tbody>
-            {transactionHistories ? (
+            {transactionHistories.length ? (
               transactionHistories.map((item) => (
                 <tr
                   key={item.id}
