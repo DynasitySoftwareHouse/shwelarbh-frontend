@@ -48,7 +48,7 @@ function FootballBodyBetting() {
   useEffect(() => {
     axios
       .get(
-        `${VITE_APP_DOMAIN}/api/football-fixtures?source=frontend&sortColumn=id&sortDirection=desc&limit=10&mm_football_category=body_total`,
+        `${VITE_APP_DOMAIN}/api/football-fixtures?source=frontend&sortColumn=id&sortDirection=desc&limit=10&mm_football_category_id=1`,
         {
           method: "GET",
           headers: {
