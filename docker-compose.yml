@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  dashboard:
+    env_file: ./.env
+    container_name: vegas-frontend
+    build:
+        dockerfile: Dockerfile
+        context: ./
+        args: 
+          - API_SERVER=$VITE_APP_DOMAIN
+          - APP_NAME=$VITE_APP_NAME
+    volumes:
+        - ./:/app
+    ports:
+        - "2222:80"
+
