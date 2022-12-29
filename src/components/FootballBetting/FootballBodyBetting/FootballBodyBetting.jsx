@@ -18,7 +18,7 @@ import lToken from "../../../services/Token";
 
 function FootballBodyBetting() {
   const MySwal = withReactContent(Swal);
-  const [alignment, setAlignment] = React.useState("");
+  const [alignment, setAlignment] = React.useState({});
   const [home, setHome] = useState({});
   const [away, setAway] = useState({});
   const [amount, setAmount] = useState("");
@@ -76,15 +76,14 @@ function FootballBodyBetting() {
   console.log(match);
   // console.log(home);
   console.log(alignment);
-  console.log(Math.abs(Number(alignment.slice(alignment.search("-"), alignment.search("_")))));
-  console.log(Number(alignment.slice(alignment.search("_")).slice(1)));
+
   // api/football-bettings    api for submit betting
   return (
     <div className={style.mainContainer}>
       <div className="text-end p-2">
         <p>ဘော်ဒီ/ဂိုးပေါင်း</p>
       </div>
-      <div className="flex flex-col justify-center items-center">
+      <div className={`${style.matchContainer} flex flex-col justify-center items-center`}>
         {match.length ? (
           match?.map((item) => (
             <div className={`bg-slate-300 w-11/12 rounded-lg mt-3`}>
@@ -111,17 +110,14 @@ function FootballBodyBetting() {
                 onChange={handleAlignment}
                 aria-label="text alignment">
                 <ToggleButton
-                  value={
-                    `${
-                      item?.over_team_data.team_type === "home"
+                  value={{
+                    name:
+                      item.over_team_data.team_type === "home"
                         ? item?.over_team_data?.name
-                        : item?.under_team_data?.name
-                    }` +
-                    `-` +
-                    `${item.id}` +
-                    "_" +
-                    `${item?.mm_football_category.id}`
-                  }
+                        : item?.under_team_data?.name,
+                    id: item.id,
+                    category_id: item.mm_football_category.id,
+                  }}
                   aria-label="left aligned"
                   style={{
                     fontSize: "12px",
@@ -138,17 +134,14 @@ function FootballBodyBetting() {
                   }` + `${" (" + item.body + ")"}`}
                 </ToggleButton>
                 <ToggleButton
-                  value={
-                    `${
-                      item?.under_team_data.team_type === "away"
+                  value={{
+                    name:
+                      item.under_team_data.team_type === "away"
                         ? item?.under_team_data?.name
-                        : item?.over_team_data?.name
-                    }` +
-                    `-` +
-                    `${item.id}` +
-                    "_" +
-                    `${item?.mm_football_category.id}`
-                  }
+                        : item?.over_team_data?.name,
+                    id: item.id,
+                    category_id: item.mm_football_category.id,
+                  }}
                   aria-label="right aligned"
                   style={{
                     fontSize: "12px",
@@ -165,13 +158,11 @@ function FootballBodyBetting() {
                   }`}
                 </ToggleButton>
                 <ToggleButton
-                  value={
-                    `${item?.over_team_data.team_type === "home" ? "over" : "under"}` +
-                    `-` +
-                    `${item.id}` +
-                    "_" +
-                    `${item?.mm_football_category?.id}`
-                  }
+                  value={{
+                    name: item.over_team_data.team_type === "home" ? "over" : "under",
+                    id: item.id,
+                    category_id: item.mm_football_category.id,
+                  }}
                   aria-label="home aligned"
                   style={{
                     fontSize: "12px",
@@ -216,13 +207,11 @@ function FootballBodyBetting() {
                   {item.total}
                 </div>
                 <ToggleButton
-                  value={
-                    `${item?.under_team_data.team_type === "away" ? "under" : "over"}` +
-                    `-` +
-                    `${item.id}` +
-                    "_" +
-                    `${item?.mm_football_category.id}`
-                  }
+                  value={{
+                    name: item.under_team_data.team_type === "away" ? "under" : "over",
+                    id: item.id,
+                    category_id: item.mm_football_category.id,
+                  }}
                   aria-label="away aligned"
                   style={{
                     fontSize: "12px",
@@ -331,7 +320,7 @@ function FootballBodyBetting() {
                     <tr>
                       <td className={`px-5`}>ထိုးမည့်အသင်း</td>
                       <td>
-                        <p className={`py-3`}>{alignment.substring(0, alignment.search("-"))}</p>
+                        <p className={`py-3`}>{alignment.name}</p>
                       </td>
                     </tr>
                     <tr>
@@ -353,12 +342,8 @@ function FootballBodyBetting() {
                           amount: Number(amount),
                           bet_fixtures: [
                             {
-                              football_fixture_id: Math.abs(
-                                Number(
-                                  alignment.slice(alignment.search("-"), alignment.search("_"))
-                                )
-                              ),
-                              bet_team: alignment.substring(0, alignment.search("-")),
+                              football_fixture_id: alignment.id,
+                              bet_team: alignment.name,
                               bet_type: "body",
                               // `${
                               //   alignment.substring(0, alignment.search("-")) === "over"
@@ -372,9 +357,7 @@ function FootballBodyBetting() {
                               // }`,
                             },
                           ],
-                          mm_football_category_id: Number(
-                            alignment.slice(alignment.search("_")).slice(1)
-                          ),
+                          mm_football_category_id: alignment.id,
                         },
                         {
                           method: "POST",
