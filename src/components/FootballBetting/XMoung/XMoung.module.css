@@ -3,5 +3,11 @@
   background-position: center;
   background-size: cover;
   width: 100vw;
-  height: 100vh;
+  height: auto;
+  overflow-x: auto;
+}
+.matchContainer {
+  margin-top: 30px;
+  height: 96vh;
+  margin-bottom: 100px;
 }
