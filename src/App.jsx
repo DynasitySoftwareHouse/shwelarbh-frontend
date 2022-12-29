@@ -2,8 +2,12 @@ import "./App.css";
 import Router from "./components/routes/Router.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { StyledEngineProvider } from "@mui/material/styles";
+import Error from "./components/Error/Error";
+
 function App() {
-  return (
+  const { VITE_APP_NAME } = import.meta.env;
+
+  return VITE_APP_NAME === "shwelarbh" ? (
     <StyledEngineProvider injectFirst>
       <BrowserRouter>
         <div className="App">
@@ -11,6 +15,8 @@ function App() {
         </div>
       </BrowserRouter>
     </StyledEngineProvider>
+  ) : (
+    <Error></Error>
   );
 }
 
