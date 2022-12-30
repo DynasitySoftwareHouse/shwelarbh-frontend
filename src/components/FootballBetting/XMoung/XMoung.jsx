@@ -138,7 +138,7 @@ function XMoung() {
                     // item.over_team_data.team_type === "home"
                     //   ? item?.over_team_data?.name
                     //   : item?.under_team_data?.name,
-                    bet_type: "X_moung",
+                    bet_type: "x-maung",
                     football_fixture_id: item.id,
                   }}
                   aria-label="left aligned"
@@ -162,7 +162,7 @@ function XMoung() {
                     // item.under_team_data.team_type === "away"
                     //   ? item?.under_team_data?.name
                     //   : item?.over_team_data?.name,
-                    bet_type: "X_moung",
+                    bet_type: "x-maung",
                     football_fixture_id: item.id,
                   }}
                   aria-label="right aligned"
@@ -183,7 +183,7 @@ function XMoung() {
                 <ToggleButton
                   value={{
                     bet_team: item.over_team_data.team_type === "home" ? "over" : "under",
-                    bet_type: "X_moung",
+                    bet_type: "x-maung",
                     football_fixture_id: item.id,
                   }}
                   aria-label="home aligned"
@@ -232,7 +232,7 @@ function XMoung() {
                 <ToggleButton
                   value={{
                     bet_team: item.under_team_data.team_type === "away" ? "under" : "over",
-                    bet_type: "X_moung",
+                    bet_type: "x-maung",
                     football_fixture_id: item.id,
                   }}
                   aria-label="away aligned"
