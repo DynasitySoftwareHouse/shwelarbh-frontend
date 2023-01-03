@@ -37,7 +37,7 @@ function Withdraw() {
   const lToken = localStorage.getItem("lToken");
   useEffect(() => {
     axios
-      .get(`${VITE_APP_DOMAIN}/api/admin/configuration-setting`, {
+      .get(`${VITE_APP_DOMAIN}api/admin/configuration-setting`, {
         method: "GET",
         headers: {
           authorization: lToken,
@@ -53,7 +53,7 @@ function Withdraw() {
       });
   }, []);
   useEffect(()=>{
-    axios.get(`${VITE_APP_DOMAIN}/api/available-payment-providers`,{
+    axios.get(`${VITE_APP_DOMAIN}api/available-payment-providers`,{
       method:'GET',
       headers:{
         authorization:lToken,
@@ -93,7 +93,7 @@ function Withdraw() {
                      onClick ={(e)=>{
                       e.preventDefault()
                       setAnchorEl(event.currentTarget);
-                      axios.request(`${VITE_APP_DOMAIN}/api/generate-admin-payment-account/${payment.id}`,{
+                      axios.request(`${VITE_APP_DOMAIN}api/generate-admin-payment-account/${payment.id}`,{
                         method:'GET',
                        headers:{
                        authorization:lToken,
@@ -160,7 +160,7 @@ function Withdraw() {
                                      onClick={() => {
                           axios
                             .post(
-                              `${VITE_APP_DOMAIN}/api/vegas-withdraw`,
+                              `${VITE_APP_DOMAIN}api/vegas-withdraw`,
                               {
                                 amount: amount,
                                 account_no: accountNumber,

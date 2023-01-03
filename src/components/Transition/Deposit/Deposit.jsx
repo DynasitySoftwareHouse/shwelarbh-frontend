@@ -23,7 +23,7 @@ function Deposit() {
   const [paymentData, setPaymentData] = useState({});
   useEffect(() => {
     axios
-      .get(`${VITE_APP_DOMAIN}/api/admin/configuration-setting`, {
+      .get(`${VITE_APP_DOMAIN}api/admin/configuration-setting`, {
         method: "GET",
         headers: {
           authorization: lToken,
@@ -39,7 +39,7 @@ function Deposit() {
   }, []);
   useEffect(() => {
     axios
-      .get(`${VITE_APP_DOMAIN}/api/available-payment-providers`, {
+      .get(`${VITE_APP_DOMAIN}api/available-payment-providers`, {
         method: "GET",
         headers: {
           authorization: lToken,
@@ -119,7 +119,7 @@ function Deposit() {
                       e.preventDefault();
                       axios
                         .request(
-                          `${VITE_APP_DOMAIN}/api/generate-admin-payment-account/${payment.id}`,
+                          `${VITE_APP_DOMAIN}api/generate-admin-payment-account/${payment.id}`,
                           {
                             method: "GET",
                             headers: author,
@@ -214,7 +214,7 @@ function Deposit() {
                         onClick={() => {
                           axios
                             .post(
-                              `${VITE_APP_DOMAIN}/api/deposit`,
+                              `${VITE_APP_DOMAIN}api/deposit`,
                               {
                                 amount: Number(transferAmount),
                                 account_no: accountNumber,

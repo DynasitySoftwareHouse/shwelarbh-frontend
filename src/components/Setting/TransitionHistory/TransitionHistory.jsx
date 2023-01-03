@@ -10,7 +10,7 @@ function TransitionHistory() {
   const [transactionHistories, setTransactionHistories] = useState([]);
   useEffect(() => {
     axios
-      .get(`${VITE_APP_DOMAIN}/api/wallet/transaction-histories?user_id=${userData?.user_id}`, {
+      .get(`${VITE_APP_DOMAIN}api/wallet/transaction-histories?user_id=${userData?.user_id}`, {
         method: "GET",
         headers: {
           authorization: lToken,
@@ -26,7 +26,7 @@ function TransitionHistory() {
       .catch((error) => {
         console.log(error);
       });
-  }, [`${VITE_APP_DOMAIN}/api/wallet/transaction-histories?user_id=${userData?.user_id}`]);
+  }, [`${VITE_APP_DOMAIN}api/wallet/transaction-histories?user_id=${userData?.user_id}`]);
 
   return (
     <div className={style.mainContainer}>

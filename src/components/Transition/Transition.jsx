@@ -27,7 +27,7 @@ function Transition() {
   //this is kaung commit deposit history api fetch
   // useEffect(() => {
   //   axios
-  //     .get(`${VITE_APP_DOMAIN}/api/deposit-histories?sortColumn=id&sortDirection=desc&limit=20`, {
+  //     .get(`${VITE_APP_DOMAIN}api/deposit-histories?sortColumn=id&sortDirection=desc&limit=20`, {
   //       methods: "GET",
   //       headers: {
   //         authorization: lToken,
@@ -50,7 +50,7 @@ function Transition() {
   // //this is thazin commit withdraw history api fetch
   // useEffect(() => {
   //   axios
-  //     .get(`${VITE_APP_DOMAIN}/api/user-withdraw?receive user_id=${userData?.user_id}`, {
+  //     .get(`${VITE_APP_DOMAIN}api/user-withdraw?receive user_id=${userData?.user_id}`, {
   //       method: "GET",
   //       headers: {
   //         authorization: lToken,
@@ -68,7 +68,7 @@ function Transition() {
   //     .catch((error) => {
   //       console.log(error);
   //     });
-  // }, [`${VITE_APP_DOMAIN}/api/user-withdraw?receive user_id=${userData?.user_id}`]);
+  // }, [`${VITE_APP_DOMAIN}api/user-withdraw?receive user_id=${userData?.user_id}`]);
 
   // const depositHandler = () => {
   //   setHistories([]);
@@ -102,7 +102,7 @@ function Transition() {
             onClick={() => {
               axios
                 .get(
-                  `${VITE_APP_DOMAIN}/api/deposit-histories?sortColumn=id&sortDirection=desc&limit=20`,
+                  `${VITE_APP_DOMAIN}api/deposit-histories?sortColumn=id&sortDirection=desc&limit=20`,
                   {
                     methods: "GET",
                     headers: {
@@ -133,7 +133,7 @@ function Transition() {
           <button
             onClick={() => {
               axios
-                .get(`${VITE_APP_DOMAIN}/api/user-withdraw?receive user_id=${userData?.user_id}`, {
+                .get(`${VITE_APP_DOMAIN}api/user-withdraw?receive user_id=${userData?.user_id}`, {
                   method: "GET",
                   headers: {
                     authorization: lToken,

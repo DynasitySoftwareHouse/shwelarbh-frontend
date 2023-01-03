@@ -16,7 +16,7 @@ function FootballResult() {
   useEffect(() => {
     axios
       .get(
-        `${VITE_APP_DOMAIN}/api/football-fixtures?source=dashboard&sortColumn=id&sortDirection=desc&limit=10&mm_football_category=body_total`,
+        `${VITE_APP_DOMAIN}api/football-fixtures?source=dashboard&sortColumn=id&sortDirection=desc&limit=10&mm_football_category=body_total`,
         {
           method: "GET",
           headers: {

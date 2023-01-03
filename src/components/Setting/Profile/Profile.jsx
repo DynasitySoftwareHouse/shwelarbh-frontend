@@ -19,7 +19,7 @@ function Profile(props) {
   };
   useEffect(() => {
     axios
-      .get(`${VITE_APP_DOMAIN}/api/get-login-user`, {
+      .get(`${VITE_APP_DOMAIN}api/get-login-user`, {
         method: "GET",
         headers: {
           authorization: localStorage.getItem("lToken"),

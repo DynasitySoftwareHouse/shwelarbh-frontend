@@ -65,7 +65,7 @@ const SignUp = () => {
         password_confirmation: confirmPassword,
       });
       axios
-        .post(`${VITE_APP_DOMAIN}/api/register-email`, {
+        .post(`${VITE_APP_DOMAIN}api/register-email`, {
           email: email,
           verification_code: otpCode,
           password: password,
@@ -99,7 +99,7 @@ const SignUp = () => {
   const otpHandler = (e) => {
     e.preventDefault();
     axios
-      .post(`${VITE_APP_DOMAIN}/api/send-email-otp`, {
+      .post(`${VITE_APP_DOMAIN}api/send-email-otp`, {
         email,
       })
       .then((res) => {
