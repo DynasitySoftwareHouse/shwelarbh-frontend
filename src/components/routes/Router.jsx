@@ -58,6 +58,7 @@ function Router() {
   return (
     <UserContext.Provider value={dataResponse}>
       <Routes>
+        <Route exact index path="/app/test" element={<Login />}></Route>
         <Route exact index path="/" element={<Login />}></Route>
         <Route exact path="/signup" element={<SignUp />}></Route>
         <Route exact path="/home" element={<Home />}></Route>
