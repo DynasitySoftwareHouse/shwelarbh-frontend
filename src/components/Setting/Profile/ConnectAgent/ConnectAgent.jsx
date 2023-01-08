@@ -8,7 +8,7 @@ function ConnectAgent() {
 
   const submitHandler =(e)=>{
     e.preventDefault();
-    axios.post(`${VITE_APP_DOMAIN}/api/customers/connect-agent/2`,{
+    axios.post(`${VITE_APP_DOMAIN}api/customers/connect-agent/2`,{
       agent_id:agentId
     },{
       method:"POST",

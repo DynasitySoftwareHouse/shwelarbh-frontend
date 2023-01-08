@@ -25,7 +25,7 @@ function FootballResult() {
   useEffect(() => {
     axios
       .get(
-        `${VITE_APP_DOMAIN}/api/football-bettings/bet-user-table-report?start_date=${startDate}&end_date=${endDate}&status`,
+        `${VITE_APP_DOMAIN}api/football-bettings/bet-user-table-report?start_date=${startDate}&end_date=${endDate}&status`,
         {
           methods: "GET",
           headers: {
@@ -45,7 +45,7 @@ function FootballResult() {
         console.log(error);
       });
   }, [
-    `${VITE_APP_DOMAIN}/api/football-bettings/bet-user-table-report?start_date=${startDate}&end_date=${endDate}&status`,
+    `${VITE_APP_DOMAIN}api/football-bettings/bet-user-table-report?start_date=${startDate}&end_date=${endDate}&status`,
   ]);
 
   // console.log(value[0].$d.toLocaleDateString(), value[1].$d.toLocaleDateString());

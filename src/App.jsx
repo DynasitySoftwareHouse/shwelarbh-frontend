@@ -6,7 +6,7 @@ import Error from "./components/Error/Error";
 
 function App() {
   const { VITE_APP_NAME } = import.meta.env;
-
+  console.log(`${VITE_APP_NAME} website is running  `)
   return VITE_APP_NAME === "shwelarbh" ? (
     <StyledEngineProvider injectFirst>
       <BrowserRouter>

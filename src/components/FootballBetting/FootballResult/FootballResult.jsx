@@ -25,7 +25,9 @@ function FootballResult() {
 
   useEffect(() => {
     axios
+
       .get(`https://api-football-v1.p.rapidapi.com/v3/fixtures?date=${value}`, options)
+
       .then((response) => {
         // return response.response;
         console.log(response.data.response);

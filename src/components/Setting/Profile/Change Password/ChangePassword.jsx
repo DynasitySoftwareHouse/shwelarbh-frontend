@@ -21,7 +21,7 @@ function ChangePassword() {
   const submitHandler = (e) => {
     e.preventDefault();
     axios
-      .post(`${VITE_APP_DOMAIN}/api/change-password`, {
+      .post(`${VITE_APP_DOMAIN}api/change-password`, {
       
         old_password:oldPassword,
         password:newPassword,

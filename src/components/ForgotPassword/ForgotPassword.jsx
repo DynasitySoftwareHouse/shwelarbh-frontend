@@ -25,7 +25,7 @@ const newpasswordHandler =(e)=>{
 
 const submitHandler =(e)=>{
   e.preventDefault();
-  axios.post(`${VITE_APP_DOMAIN}/api/account-recovery`,{
+  axios.post(`${VITE_APP_DOMAIN}api/account-recovery`,{
     verification_code:otp,
     password:newPassword,
     password_confirmation:newConfirmPassword,
