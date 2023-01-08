@@ -26,7 +26,29 @@ function XMoung() {
 
   const handleAlignment = (event, newAlignment) => {
     setAlignment(newAlignment);
+    // console.log(newAlignment);
+    setBetMatch([...betMatch, newAlignment]);
   };
+  console.log(betMatch);
+  // console.log(betMatch);
+  const betHandler = () => {
+    for (let i = 0; i < betMatch.length; i++) {
+      if (betMatch[i]?.football_fixture_id === betMatch[i + 1]?.football_fixture_id) {
+        console.log("same");
+        betMatch.splice(betMatch[i], 1);
+      }
+      console.log(betMatch);
+      // for (let j = 0; j < betMatch.length; j++) {
+      //   if (betMatch[j]?.football_fixture_id === betMatch[j + 1]?.football_fixture_id) {
+      //     // console.log("same");
+      //     betMatch.splice(betMatch[j], 1);
+      //   }
+      //   console.log("Next Again", betMatch);
+      // }
+      // }
+    }
+  };
+  betHandler();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -76,7 +98,7 @@ function XMoung() {
   }, []);
   console.log(match);
   // console.log(home);
-  console.log(alignment);
+  // console.log(alignment);
 
   // api/football-bettings    api for submit betting
   return (
@@ -112,11 +134,11 @@ function XMoung() {
                 aria-label="text alignment">
                 <ToggleButton
                   value={{
-                    bet_team:
-                      item.over_team_data.team_type === "home"
-                        ? item?.over_team_data?.name
-                        : item?.under_team_data?.name,
-                    bet_type: "x_moung",
+                    bet_team: item.over_team_data.team_type === "home" ? "over" : "under",
+                    // item.over_team_data.team_type === "home"
+                    //   ? item?.over_team_data?.name
+                    //   : item?.under_team_data?.name,
+                    bet_type: "x-maung",
                     football_fixture_id: item.id,
                   }}
                   aria-label="left aligned"
@@ -136,11 +158,11 @@ function XMoung() {
                 </ToggleButton>
                 <ToggleButton
                   value={{
-                    bet_team:
-                      item.under_team_data.team_type === "away"
-                        ? item?.under_team_data?.name
-                        : item?.over_team_data?.name,
-                    bet_type: "x_moung",
+                    bet_team: item.under_team_data.team_type === "away" ? "under" : "over",
+                    // item.under_team_data.team_type === "away"
+                    //   ? item?.under_team_data?.name
+                    //   : item?.over_team_data?.name,
+                    bet_type: "x-maung",
                     football_fixture_id: item.id,
                   }}
                   aria-label="right aligned"
@@ -161,7 +183,7 @@ function XMoung() {
                 <ToggleButton
                   value={{
                     bet_team: item.over_team_data.team_type === "home" ? "over" : "under",
-                    bet_type: "x_moung",
+                    bet_type: "x-maung",
                     football_fixture_id: item.id,
                   }}
                   aria-label="home aligned"
@@ -210,7 +232,7 @@ function XMoung() {
                 <ToggleButton
                   value={{
                     bet_team: item.under_team_data.team_type === "away" ? "under" : "over",
-                    bet_type: "x_moung",
+                    bet_type: "x-maung",
                     football_fixture_id: item.id,
                   }}
                   aria-label="away aligned"
@@ -315,13 +337,17 @@ function XMoung() {
                 "aria-labelledby": "basic-button",
               }}>
               <form action="" className={`form-control`}>
-                <p className={`text-lg px-10 pt-5 font-bold`}>Bet Slip</p>
+                <p className={`text-lg px-10 pt-5 font-bold text-lime-600`}>Bet Slip</p>
                 <table>
                   <tbody>
                     <tr>
                       <td className={`px-5`}>ထိုးမည့်အသင်း</td>
                       <td>
-                        <p className={`py-3`}>{alignment.name}</p>
+                        <p style={{ display: "flex", flexDirection: "column" }} className={`py-3`}>
+                          {betMatch.map((match, index) => (
+                            <span key={index}>{match.bet_team}</span>
+                          ))}
+                        </p>
                       </td>
                     </tr>
                     <tr>
@@ -341,24 +367,24 @@ function XMoung() {
                         `${VITE_APP_DOMAIN}api/football-bettings`,
                         {
                           amount: Number(amount),
-                          bet_fixtures: [
-                            {
-                              football_fixture_id: alignment.id,
-                              bet_team: alignment.name,
-                              bet_type: "x_moung",
-                              // `${
-                              //   alignment.substring(0, alignment.search("-")) === "over"
-                              //     ? "over"
-                              //     : alignment.substring(0, alignment.search("-"))
-                              // }` ||
-                              // `${
-                              //   alignment.substring(0, alignment.search("-")) === "under"
-                              //     ? "under"
-                              //     : alignment.substring(0, alignment.search("-"))
-                              // }`,
-                            },
-                          ],
-                          mm_football_category_id: alignment.category_id,
+                          bet_fixtures: betMatch,
+                          // {
+                          //   football_fixture_id: alignment.id,
+                          //   bet_team: alignment.name,
+                          //   bet_type: "x_moung",
+                          //   // `${
+                          //   //   alignment.substring(0, alignment.search("-")) === "over"
+                          //   //     ? "over"
+                          //   //     : alignment.substring(0, alignment.search("-"))
+                          //   // }` ||
+                          //   // `${
+                          //   //   alignment.substring(0, alignment.search("-")) === "under"
+                          //   //     ? "under"
+                          //   //     : alignment.substring(0, alignment.search("-"))
+                          //   // }`,
+                          // },
+
+                          mm_football_category_id: match[0]?.mm_football_category?.id,
                         },
                         {
                           method: "POST",

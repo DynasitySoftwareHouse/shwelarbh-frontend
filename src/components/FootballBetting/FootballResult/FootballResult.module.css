@@ -5,11 +5,44 @@
   background-size: cover;
   background-attachment: fixed;
   width: 100vw;
-  height: auto;
 }
 .label {
   color: #fff;
 }
 .datePickerContainer {
-  height: 150px;
+  height: 100px;
+  width: 100vw;
+  background-color: black;
+  position: fixed;
+  top: 0;
+}
+.card {
+  width: 90vw !important;
+  margin: 10px auto;
+  background-color: rgb(179, 179, 179);
+  color: black;
+  border-radius: 10px;
+}
+.matchMainContainer {
+  padding-top: 110px;
+  width: auto;
+}
+.home,
+.away {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+.home {
+  flex-direction: row-reverse;
+}
+.heightFull {
+  background-image: url("../../../assets//result_background.jpeg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
 }
